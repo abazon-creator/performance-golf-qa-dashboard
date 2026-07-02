@@ -4,188 +4,232 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Performance Golf — Daily Performance &amp; QA Dashboard</title>
+<!--
+  Brand fonts Repro (sans), Repro Mono, and GT Super are licensed/proprietary.
+  Free stand-ins used here: Space Grotesk (~Repro), Space Mono (~Repro Mono),
+  Fraunces (~GT Super). Swap the @font-face/family names if the licensed webfonts
+  become available.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b1410;
-    --panel:#12211a;
-    --panel-2:#16281f;
-    --line:#22392e;
-    --ink:#eaf3ee;
-    --muted:#9fb6ab;
-    --faint:#6f8a7d;
-    --green:#37c871;
-    --green-dk:#1f8f4d;
-    --lime:#a7e34a;
-    --amber:#f6c453;
-    --red:#f6685e;
-    --blue:#5aa9ff;
-    --radius:16px;
-    --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 20px 40px -24px rgba(0,0,0,.7);
-    --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
-    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    /* Performance Golf palette */
+    --orange:#FD3300;
+    --orange-dk:#DB2C00;
+    --black:#1D1A1A;
+    --gray-text:#7B726C;
+    --stone:#B3AAA3;
+    --pebble:#DFD9D5;
+    --sand:#ECE9E4;
+    --fog:#F4F2F0;
+    --mist:#FCFAFA;
+    /* semantic (data) */
+    --good:#1f7a4d;
+    --good-bg:rgba(31,122,77,.10);
+    --warn:#b3781f;
+    --warn-bg:rgba(179,120,31,.12);
+    --bad:var(--orange);
+    --bad-bg:rgba(253,51,0,.09);
+
+    --radius:14px;
+    --shadow:0 1px 2px rgba(29,26,26,.04), 0 12px 30px -18px rgba(29,26,26,.22);
+    --sans:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0;background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(55,200,113,.10), transparent 60%),
-      radial-gradient(900px 500px at -10% 10%, rgba(90,169,255,.06), transparent 55%),
-      var(--bg);
-    color:var(--ink);font-family:var(--sans);line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    margin:0;background:var(--fog);color:var(--black);
+    font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;
   }
   a{color:inherit}
   .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 
   /* ---------- header ---------- */
   header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-    background:linear-gradient(180deg, rgba(11,20,16,.92), rgba(11,20,16,.72));
-    border-bottom:1px solid var(--line)}
-  .top-inner{display:flex;align-items:center;gap:16px;padding:14px 0}
-  .logo{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em}
-  .logo .mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--green),var(--green-dk));color:#04120a;font-size:16px}
-  .logo small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
-  .top nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
-  .top nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:9px;transition:.15s}
-  .top nav a:hover{color:var(--ink);background:var(--panel)}
-  .datepill{font-size:12px;color:var(--faint);border:1px solid var(--line);padding:6px 11px;border-radius:20px;white-space:nowrap}
+    background:rgba(252,250,250,.86);border-bottom:1px solid var(--pebble)}
+  .top-inner{display:flex;align-items:center;gap:16px;padding:13px 0}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em}
+  .logo .mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+    background:var(--orange);color:var(--mist);font-size:16px}
+  .logo .nm{line-height:1.05}
+  .logo small{display:block;font-weight:400;font-size:10.5px;color:var(--gray-text);letter-spacing:.16em;text-transform:uppercase;font-family:var(--mono)}
+  .top nav{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap}
+  .top nav a{font-size:13px;color:var(--gray-text);text-decoration:none;padding:7px 10px;border-radius:8px;transition:.15s;font-weight:500}
+  .top nav a:hover{color:var(--black);background:var(--sand)}
+  .datepill{font-family:var(--mono);font-size:11.5px;color:var(--black);border:1px solid var(--pebble);background:var(--mist);padding:6px 10px;border-radius:20px;white-space:nowrap}
 
   /* ---------- hero ---------- */
-  .hero{padding:40px 0 8px}
-  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:700}
-  .hero h1{font-size:clamp(28px,4.4vw,44px);line-height:1.08;margin:12px 0 10px;font-weight:800;letter-spacing:-.02em}
-  .hero p.lede{color:var(--muted);max-width:760px;font-size:16px;margin:0}
+  .hero{padding:40px 0 6px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-weight:700}
+  .hero h1{font-family:var(--serif);font-size:clamp(30px,5vw,50px);line-height:1.02;margin:14px 0 12px;font-weight:600;letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;color:var(--orange)}
+  .hero p.lede{color:var(--gray-text);max-width:760px;font-size:16px;margin:0}
+  .hero p.lede b{color:var(--black)}
+
+  /* ---------- filter bar ---------- */
+  .filters{position:sticky;top:57px;z-index:40;background:rgba(244,242,240,.92);backdrop-filter:blur(8px);
+    border-top:1px solid var(--pebble);border-bottom:1px solid var(--pebble);margin-top:26px}
+  .filters-inner{display:flex;align-items:center;gap:14px;padding:12px 0;flex-wrap:wrap}
+  .seg{display:inline-flex;background:var(--sand);border:1px solid var(--pebble);border-radius:10px;padding:3px}
+  .seg button{background:none;border:0;font:inherit;font-size:13px;font-weight:600;color:var(--gray-text);
+    padding:7px 15px;border-radius:8px;cursor:pointer;transition:.15s}
+  .seg button.on{background:var(--orange);color:var(--mist)}
+  .datectl{display:inline-flex;align-items:center;gap:6px}
+  .datectl button{width:32px;height:34px;border:1px solid var(--pebble);background:var(--mist);border-radius:9px;
+    cursor:pointer;font-size:15px;color:var(--black);display:grid;place-items:center;transition:.15s}
+  .datectl button:hover:not(:disabled){border-color:var(--orange);color:var(--orange)}
+  .datectl button:disabled{opacity:.35;cursor:not-allowed}
+  input[type=date]{font:inherit;font-family:var(--mono);font-size:13px;padding:7px 10px;border:1px solid var(--pebble);
+    background:var(--mist);border-radius:9px;color:var(--black);color-scheme:light}
+  input[type=date]:focus{outline:2px solid var(--orange);outline-offset:-1px}
+  .rangelbl{font-family:var(--mono);font-size:11.5px;color:var(--gray-text);letter-spacing:.02em;margin-left:auto}
+  .rangelbl b{color:var(--black)}
+  .quickdays{display:inline-flex;gap:5px;flex-wrap:wrap}
+  .quickday{font-family:var(--mono);font-size:11.5px;border:1px solid var(--pebble);background:var(--mist);color:var(--gray-text);
+    padding:6px 9px;border-radius:7px;cursor:pointer;transition:.15s}
+  .quickday:hover{border-color:var(--orange);color:var(--orange)}
+  .quickday.on{background:var(--black);color:var(--mist);border-color:var(--black)}
 
   /* ---------- kpi ---------- */
   .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:26px 0 8px}
-  .kpi{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
-    border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .kpi .v{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:3px}
-  .kpi .tag{position:absolute;top:12px;right:12px;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.03em}
-  .tag.good{background:rgba(55,200,113,.14);color:var(--green)}
-  .tag.bad{background:rgba(246,104,94,.14);color:var(--red)}
-  .tag.warn{background:rgba(246,196,83,.14);color:var(--amber)}
-  .kpi .spark{height:4px;border-radius:4px;margin-top:14px;background:var(--line);overflow:hidden}
-  .kpi .spark i{display:block;height:100%;border-radius:4px}
+  .kpi{background:var(--mist);border:1px solid var(--pebble);border-radius:var(--radius);padding:18px 16px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .kpi .v{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1}
+  .kpi .l{font-size:12.5px;color:var(--gray-text);margin-top:6px}
+  .kpi .tag{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 7px;border-radius:20px;letter-spacing:.02em}
+  .tag.good{background:var(--good-bg);color:var(--good)}
+  .tag.bad{background:var(--bad-bg);color:var(--bad)}
+  .tag.warn{background:var(--warn-bg);color:var(--warn)}
+  .kpi .spark{height:4px;border-radius:4px;margin-top:14px;background:var(--sand);overflow:hidden}
+  .kpi .spark i{display:block;height:100%;border-radius:4px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
 
   /* ---------- sections ---------- */
-  section{padding:34px 0;border-top:1px solid var(--line);margin-top:8px}
+  section{padding:34px 0;border-top:1px solid var(--pebble);margin-top:8px}
   .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-  .sec-head h2{font-size:22px;margin:0;font-weight:800;letter-spacing:-.01em}
-  .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--green);border:1px solid var(--line);
-    padding:2px 8px;border-radius:7px}
-  .sec-head p{margin:0;color:var(--faint);font-size:13.5px}
+  .sec-head h2{font-family:var(--serif);font-size:26px;margin:0;font-weight:600;letter-spacing:-.01em}
+  .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--orange);border:1px solid var(--pebble);
+    padding:2px 8px;border-radius:6px;background:var(--mist)}
+  .sec-head p{margin:0;color:var(--gray-text);font-size:13.5px}
 
-  .card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
-    border-radius:var(--radius);box-shadow:var(--shadow)}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:var(--mist);border:1px solid var(--pebble);border-radius:var(--radius);box-shadow:var(--shadow)}
   .grid-hl{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
 
   /* headline callout */
   .callout{padding:22px 24px}
-  .callout .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:8px}
-  .callout h3{margin:0 0 10px;font-size:20px;font-weight:800;letter-spacing:-.01em}
-  .callout p{margin:0;color:var(--muted);font-size:14.5px}
-  .callout strong{color:var(--ink)}
-  .bright{padding:20px 22px;display:flex;flex-direction:column;justify-content:center}
-  .bright .big{font-size:44px;font-weight:800;color:var(--green);letter-spacing:-.02em;line-height:1}
-  .bright .lbl{color:var(--muted);font-size:13.5px;margin-top:8px}
+  .callout .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px}
+  .callout h3{margin:0 0 10px;font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+  .callout p{margin:0;color:var(--gray-text);font-size:14.5px}
+  .callout strong{color:var(--black)}
+  .bright{padding:20px 22px;display:flex;flex-direction:column;justify-content:center;background:var(--black);color:var(--mist)}
+  .bright .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px}
+  .bright .big{font-family:var(--serif);font-size:46px;font-weight:600;color:var(--mist);letter-spacing:-.01em;line-height:1}
+  .bright .lbl{color:var(--stone);font-size:13.5px;margin-top:8px}
+  .bright .lbl b{color:var(--mist)}
 
   /* charts */
-  .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .chart-card{padding:20px 22px}
-  .chart-card h3{margin:0 0 4px;font-size:15px;font-weight:700}
-  .chart-card .sub{color:var(--faint);font-size:12.5px;margin-bottom:16px}
-  .bar-row{display:grid;grid-template-columns:150px 1fr 54px;align-items:center;gap:12px;margin:9px 0;font-size:13px}
-  .bar-row .nm{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bar-track{height:22px;background:rgba(255,255,255,.04);border-radius:7px;overflow:hidden;position:relative}
-  .bar-fill{height:100%;border-radius:7px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-  .bar-row .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  .chart-card h3{margin:0 0 4px;font-size:15px;font-weight:600}
+  .chart-card .sub{color:var(--gray-text);font-size:12.5px;margin-bottom:16px}
+  .bar-row{display:grid;grid-template-columns:170px 1fr 54px;align-items:center;gap:12px;margin:9px 0;font-size:13px}
+  .bar-row .nm{color:var(--gray-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar-track{height:22px;background:var(--sand);border-radius:6px;overflow:hidden;position:relative}
+  .bar-fill{height:100%;border-radius:6px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+  .bar-row .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-family:var(--mono);font-size:12.5px}
 
-  /* toggle */
-  .toggle{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin-left:auto}
-  .toggle button{background:none;border:0;color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
-    padding:6px 12px;border-radius:8px;cursor:pointer;transition:.15s}
-  .toggle button.on{background:var(--green);color:#04120a}
-
-  /* table */
-  .tbl-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line)}
-  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
-  thead th{position:sticky;top:0;background:var(--panel-2);text-align:left;padding:13px 14px;font-size:11.5px;
-    letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--line)}
-  thead th:hover{color:var(--ink)}
-  thead th .arw{opacity:.4;font-size:10px}
-  thead th.sorted .arw{opacity:1;color:var(--green)}
-  th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
-  tbody td{padding:12px 14px;border-bottom:1px solid rgba(34,57,46,.6)}
-  tbody tr:last-child td{border-bottom:0}
-  tbody tr:hover{background:rgba(55,200,113,.04)}
-  tbody tr.zero td:first-child{box-shadow:inset 3px 0 0 var(--red)}
-  .agent-name{font-weight:600}
-  .pill{display:inline-block;min-width:52px;text-align:center;padding:3px 8px;border-radius:20px;font-weight:700;font-size:12.5px;font-variant-numeric:tabular-nums}
-  .p-good{background:rgba(55,200,113,.15);color:var(--green)}
-  .p-mid{background:rgba(246,196,83,.15);color:var(--amber)}
-  .p-bad{background:rgba(246,104,94,.15);color:var(--red)}
-  .p-zero{background:rgba(246,104,94,.2);color:var(--red)}
-  .microbar{display:inline-block;height:6px;border-radius:4px;background:var(--green);vertical-align:middle;margin-left:8px}
-  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--faint)}
+  .toggle{display:inline-flex;background:var(--sand);border:1px solid var(--pebble);border-radius:9px;padding:3px;margin-left:auto}
+  .toggle button{background:none;border:0;color:var(--gray-text);font:inherit;font-size:12.5px;font-weight:600;
+    padding:6px 12px;border-radius:7px;cursor:pointer;transition:.15s}
+  .toggle button.on{background:var(--black);color:var(--mist)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--gray-text)}
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
 
+  /* table */
+  .tbl-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--pebble);background:var(--mist)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+  thead th{position:sticky;top:0;background:var(--sand);text-align:left;padding:13px 14px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--gray-text);font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1px solid var(--pebble)}
+  thead th:hover{color:var(--black)}
+  thead th .arw{opacity:.4;font-size:10px}
+  thead th.sorted{color:var(--black)}
+  thead th.sorted .arw{opacity:1;color:var(--orange)}
+  th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--sand)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--fog)}
+  tbody tr.zero td:first-child{box-shadow:inset 3px 0 0 var(--orange)}
+  .agent-name{font-weight:600}
+  .pill{display:inline-block;min-width:52px;text-align:center;padding:3px 8px;border-radius:20px;font-weight:700;font-size:12.5px;font-variant-numeric:tabular-nums;font-family:var(--mono)}
+  .p-good{background:var(--good-bg);color:var(--good)}
+  .p-mid{background:var(--warn-bg);color:var(--warn)}
+  .p-bad{background:var(--bad-bg);color:var(--bad)}
+  .p-zero{background:var(--bad-bg);color:var(--bad)}
+  .microbar{display:inline-block;height:6px;border-radius:3px;background:var(--stone);vertical-align:middle;margin-left:8px}
+
   /* call cards */
   .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-  .chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);font:inherit;font-size:12.5px;
+  .chip{background:var(--mist);border:1px solid var(--pebble);color:var(--gray-text);font:inherit;font-size:12.5px;
     font-weight:600;padding:7px 13px;border-radius:20px;cursor:pointer;transition:.15s}
-  .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .chip.on{background:var(--black);color:var(--mist);border-color:var(--black)}
   .calls{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .call{padding:16px 18px;border-left:3px solid var(--line);transition:.15s}
-  .call.flag{border-left-color:var(--red)}
-  .call.model{border-left-color:var(--green)}
+  .call{padding:16px 18px;border-left:3px solid var(--pebble);transition:.15s}
+  .call.flag{border-left-color:var(--orange)}
+  .call.model{border-left-color:var(--good)}
   .call:hover{transform:translateY(-2px)}
   .call .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
   .call .who{font-weight:700;font-size:14.5px}
-  .call .disp{font-size:11.5px;color:var(--faint);font-family:var(--mono);white-space:nowrap}
-  .call .note{color:var(--muted);font-size:13.5px;margin:0 0 12px}
+  .call .disp{font-family:var(--mono);font-size:11px;color:var(--gray-text);white-space:nowrap}
+  .call .note{color:var(--gray-text);font-size:13.5px;margin:0 0 12px}
   .call a.rec{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;text-decoration:none;
-    color:var(--green);border:1px solid var(--line);padding:6px 11px;border-radius:8px;transition:.15s}
-  .call.flag a.rec{color:var(--red)}
-  .call a.rec:hover{background:rgba(255,255,255,.04)}
-  .call .tag2{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
-  .tag2.flag{background:rgba(246,104,94,.15);color:var(--red)}
-  .tag2.model{background:rgba(55,200,113,.15);color:var(--green)}
+    color:var(--black);border:1px solid var(--pebble);padding:6px 11px;border-radius:8px;transition:.15s;background:var(--fog)}
+  .call.flag a.rec{color:var(--orange)}
+  .call.model a.rec{color:var(--good)}
+  .call a.rec:hover{border-color:currentColor}
+  .call .tag2{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+  .tag2.flag{background:var(--bad-bg);color:var(--orange)}
+  .tag2.model{background:var(--good-bg);color:var(--good)}
 
   /* rebuttals */
   .acc{display:flex;flex-direction:column;gap:10px}
-  .acc-item{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
-  .acc-btn{width:100%;background:none;border:0;color:var(--ink);font:inherit;font-weight:700;font-size:14.5px;
+  .acc-item{border:1px solid var(--pebble);border-radius:12px;overflow:hidden;background:var(--mist)}
+  .acc-btn{width:100%;background:none;border:0;color:var(--black);font:inherit;font-weight:600;font-size:14.5px;
     text-align:left;padding:15px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .acc-btn .plus{color:var(--green);font-size:20px;transition:.2s;line-height:1}
+  .acc-btn .plus{color:var(--orange);font-size:20px;transition:.2s;line-height:1}
   .acc-item.open .plus{transform:rotate(45deg)}
   .acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
   .acc-inner{padding:0 18px 16px}
-  .verbatim{font-style:italic;color:var(--muted);border-left:2px solid var(--faint);padding-left:12px;margin:0 0 12px;font-size:14px}
-  .reb{background:rgba(55,200,113,.07);border:1px solid rgba(55,200,113,.2);border-radius:10px;padding:12px 14px;font-size:13.5px}
-  .reb b{color:var(--green);display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+  .verbatim{font-family:var(--serif);font-style:italic;color:var(--black);border-left:2px solid var(--stone);padding-left:12px;margin:0 0 12px;font-size:15px}
+  .reb{background:var(--good-bg);border:1px solid rgba(31,122,77,.22);border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--black)}
+  .reb b{color:var(--good);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
 
   /* action plan */
   .actions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .action{padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
-  .action .idx{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:800;
-    background:rgba(55,200,113,.13);color:var(--green);font-size:14px}
-  .action.pri .idx{background:var(--red);color:#fff}
+  .action .idx{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-family:var(--mono);
+    background:var(--sand);color:var(--black);font-size:14px}
+  .action.pri .idx{background:var(--orange);color:var(--mist)}
   .action h4{margin:0 0 4px;font-size:14.5px}
-  .action p{margin:0;color:var(--muted);font-size:13px}
+  .action p{margin:0;color:var(--gray-text);font-size:13px}
 
-  footer{border-top:1px solid var(--line);padding:26px 0 50px;color:var(--faint);font-size:12.5px}
+  /* empty state */
+  .empty{padding:60px 24px;text-align:center;color:var(--gray-text)}
+  .empty .big{font-family:var(--serif);font-size:24px;color:var(--black);margin-bottom:8px}
+  .empty .mono{font-family:var(--mono);font-size:12px;margin-top:12px}
+  .hidden{display:none!important}
+
+  footer{border-top:1px solid var(--pebble);padding:26px 0 50px;color:var(--gray-text);font-size:12.5px;margin-top:8px}
   footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
   @media(max-width:900px){
     .kpis{grid-template-columns:repeat(2,1fr)}
-    .grid2,.grid-hl,.charts,.calls,.actions{grid-template-columns:1fr}
+    .grid-hl,.calls,.actions{grid-template-columns:1fr}
     .top nav{display:none}
-    .bar-row{grid-template-columns:120px 1fr 46px}
+    .bar-row{grid-template-columns:130px 1fr 46px}
+    .rangelbl{margin-left:0;width:100%}
   }
   @media(max-width:520px){ .kpis{grid-template-columns:1fr} }
 </style>
@@ -196,7 +240,7 @@
   <div class="wrap top-inner">
     <div class="logo">
       <span class="mark">⛳</span>
-      <span>PERFORMANCE GOLF<small>Daily Performance &amp; QA</small></span>
+      <span class="nm">PERFORMANCE GOLF<small>Daily Performance &amp; QA</small></span>
     </div>
     <nav>
       <a href="#headline">Headline</a>
@@ -206,351 +250,493 @@
       <a href="#rebuttals">Rebuttals</a>
       <a href="#plan">Action Plan</a>
     </nav>
-    <span class="datepill">July 1, 2026</span>
+    <span class="datepill" id="topDate">—</span>
   </div>
 </header>
 
+<!-- FILTER BAR -->
+<div class="filters">
+  <div class="wrap filters-inner">
+    <div class="seg" id="granSeg">
+      <button class="on" data-g="daily">Daily</button>
+      <button data-g="weekly">Weekly</button>
+      <button data-g="monthly">Monthly</button>
+    </div>
+    <div class="datectl">
+      <button id="prevDay" title="Previous">‹</button>
+      <input type="date" id="datePick" />
+      <button id="nextDay" title="Next">›</button>
+    </div>
+    <div class="quickdays" id="quickDays"></div>
+    <div class="rangelbl" id="rangeLbl"></div>
+  </div>
+</div>
+
 <div class="wrap hero" id="top">
-  <div class="eyebrow">Daily Performance &amp; QA Summary</div>
-  <h1>Today’s problem isn’t connecting.<br>It’s converting.</h1>
-  <p class="lede">Connect rate was low, but that’s a list-quality and dial-timing issue — not a skill gap. The real leak is conversion: only <b style="color:var(--ink)">12.6%</b> of connected calls closed, less than half our 30% floor. This is a coaching problem, and it’s fixable.</p>
+  <div class="eyebrow" id="heroEyebrow">Daily Performance &amp; QA Summary</div>
+  <h1 id="heroTitle">Today’s problem isn’t connecting. It’s <em>converting</em>.</h1>
+  <p class="lede" id="heroLede"></p>
 </div>
 
-<div class="wrap">
-  <div class="kpis">
-    <div class="kpi">
-      <div class="v">1,453</div><div class="l">Dials</div>
-      <div class="spark"><i style="width:100%;background:var(--blue)"></i></div>
-    </div>
-    <div class="kpi">
-      <span class="tag bad">Low</span>
-      <div class="v">14.7%</div><div class="l">Connect Rate</div>
-      <div class="spark"><i style="width:15%;background:var(--amber)"></i></div>
-    </div>
-    <div class="kpi">
-      <span class="tag bad">▼ Floor 30%</span>
-      <div class="v">12.6%</div><div class="l">Conversion</div>
-      <div class="spark"><i style="width:42%;background:var(--red)"></i></div>
-    </div>
-    <div class="kpi">
-      <span class="tag warn">Watch</span>
-      <div class="v">11.2%</div><div class="l">Decline Rate</div>
-      <div class="spark"><i style="width:37%;background:var(--amber)"></i></div>
-    </div>
-    <div class="kpi">
-      <span class="tag good">Strength</span>
-      <div class="v">55.6%</div><div class="l">Upsell Rate</div>
-      <div class="spark"><i style="width:56%;background:var(--green)"></i></div>
-    </div>
+<!-- everything below re-renders on filter change -->
+<div id="dashboard">
+  <div class="wrap">
+    <div class="kpis" id="kpis"></div>
   </div>
+
+  <section id="headline">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">01</span><h2>The Headline</h2></div>
+      <div class="grid-hl">
+        <div class="card callout" id="headlineCard"></div>
+        <div class="card bright" id="brightCard"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dispo">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">02</span><h2>Disposition Breakdown</h2>
+        <p id="dispoSub"></p>
+        <div class="toggle" id="dispoToggle">
+          <button class="on" data-view="dials">All dials</button>
+          <button data-view="conn">Within connected</button>
+        </div>
+      </div>
+      <div class="card chart-card">
+        <h3 id="chartTitle"></h3>
+        <div class="sub" id="chartSub"></div>
+        <div id="dispoBars"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--orange)"></i> Unreachable / no-connect</span>
+          <span><i class="dot" style="background:var(--good)"></i> Sold</span>
+          <span><i class="dot" style="background:var(--stone)"></i> Other outcome</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agents">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">03</span><h2>Agent Scorecard</h2>
+        <p>Every agent below the 30% conversion floor is flagged. Click any column to sort.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table id="agentTable">
+          <thead>
+            <tr>
+              <th data-k="name" data-t="str">Agent <span class="arw">↕</span></th>
+              <th class="num" data-k="dials" data-t="num">Dials <span class="arw">↕</span></th>
+              <th class="num" data-k="conn" data-t="num">Conn <span class="arw">↕</span></th>
+              <th class="num" data-k="sold" data-t="num">Sold <span class="arw">↕</span></th>
+              <th class="num sorted" data-k="conv" data-t="num">Conv % <span class="arw">↓</span></th>
+              <th class="num" data-k="dec" data-t="num">Dec % <span class="arw">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="agentBody"></tbody>
+        </table>
+      </div>
+      <p style="color:var(--gray-text);font-size:13px;margin-top:12px" id="agentNote"></p>
+    </div>
+  </section>
+
+  <section id="glaring">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">04</span><h2>Most Glaring Opportunity</h2></div>
+      <div class="card callout" id="glaringCard" style="border-left:3px solid var(--orange)"></div>
+    </div>
+  </section>
+
+  <section id="calls">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">05</span><h2>Flagged &amp; Model Calls</h2><p>Coaching material — what to fix, and what good sounds like.</p></div>
+      <div class="filterbar" id="callFilter"></div>
+      <div class="calls" id="callGrid"></div>
+    </div>
+  </section>
+
+  <section id="rebuttals">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">06</span><h2>Top Decline Reasons &amp; Rebuttals</h2><p>Member verbatim, paired with the high-converting response. Tap to expand.</p></div>
+      <div class="acc" id="acc"></div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">07</span><h2>Action Plan</h2></div>
+      <div class="actions" id="actions"></div>
+    </div>
+  </section>
 </div>
 
-<!-- HEADLINE -->
-<section id="headline">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">01</span><h2>The Headline</h2></div>
-    <div class="grid-hl">
-      <div class="card callout">
-        <div class="k">Where the leak is</div>
-        <h3>Four high-volume dialers connected repeatedly and closed nothing.</h3>
-        <p>Connect rate was low (<strong>14.7%</strong>), but that’s list quality and dial timing. The real leak is conversion: <strong>only 12.6% of connected calls closed</strong> — less than half our 30% floor. This is a coaching problem, and it is fixable through disengagement discipline and a cleaner offer-and-close transition.</p>
-      </div>
-      <div class="card bright">
-        <div class="k" style="color:var(--green);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Bright spot</div>
-        <div class="big">55.6%</div>
-        <div class="lbl">of sales carried a second product — <b style="color:var(--ink)">15 of 27 sales</b> upsold. Excellent, and worth protecting.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DISPOSITIONS -->
-<section id="dispo">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="num">02</span><h2>Disposition Breakdown</h2>
-      <p>1,453 dials → 214 connected → 27 sold</p>
-      <div class="toggle" id="dispoToggle">
-        <button class="on" data-view="dials">All dials</button>
-        <button data-view="conn">Within connected</button>
-      </div>
-    </div>
-    <div class="card chart-card">
-      <h3 id="chartTitle">Team disposition of all 1,453 dials</h3>
-      <div class="sub" id="chartSub">78.5% of dials never reach a human — a list-quality and timing signal.</div>
-      <div id="dispoBars"></div>
-      <div class="legend">
-        <span><i class="dot" style="background:var(--red)"></i> Unreachable / no-connect</span>
-        <span><i class="dot" style="background:var(--green)"></i> Sold</span>
-        <span><i class="dot" style="background:var(--amber)"></i> Other outcome</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AGENTS -->
-<section id="agents">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="num">03</span><h2>Agent Scorecard</h2>
-      <p>Every agent is below the 30% conversion floor. Click any column to sort.</p>
-    </div>
-    <div class="tbl-wrap">
-      <table id="agentTable">
-        <thead>
-          <tr>
-            <th data-k="name" data-t="str">Agent <span class="arw">↕</span></th>
-            <th class="num" data-k="dials" data-t="num">Dials <span class="arw">↕</span></th>
-            <th class="num" data-k="conn" data-t="num">Conn <span class="arw">↕</span></th>
-            <th class="num" data-k="sold" data-t="num">Sold <span class="arw">↕</span></th>
-            <th class="num sorted" data-k="conv" data-t="num">Conv % <span class="arw">↓</span></th>
-            <th class="num" data-k="dec" data-t="num">Dec % <span class="arw">↕</span></th>
-          </tr>
-        </thead>
-        <tbody id="agentBody"></tbody>
-      </table>
-    </div>
-    <p style="color:var(--faint);font-size:13px;margin-top:12px">
-      <b style="color:var(--green)">Rubilyn Estrada</b> (25.0%, zero declines) and <b style="color:var(--green)">Christian Buceron</b> (21.1%) are the internal benchmark. Rows marked in <b style="color:var(--red)">red</b> connected but closed nothing.
-    </p>
-  </div>
-</section>
-
-<!-- GLARING -->
-<section id="glaring">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">04</span><h2>Most Glaring Opportunity</h2></div>
-    <div class="card callout" style="border-left:3px solid var(--red)">
-      <div class="k" style="color:var(--red)">Prince Wendell De Luna · 202 dials (team-high) · 19 connects · 0 closes</div>
-      <h3>The issue isn’t effort — it’s an inability to disengage.</h3>
-      <p>Transcripts show a pattern of pitching past explicit refusals, which is also a compliance exposure. In a <strong>20-min call</strong>, a customer stated upfront he buys clubs, reviews them on YouTube, and returns them — a self-identified serial returner — and Prince pitched a wedge trial anyway. In a <strong>16-min “undecided,”</strong> the member said “we’re wasting time” and “no trial, nothing that involves cash,” yet Prince re-pitched the 30-day trial and read the billing disclosure after the third no. <strong>Stop the tape at the first firm refusal.</strong> Chelei, Audrey, and Jesica share the milder version — good rapport, no clean transition to offer-and-close.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CALLS -->
-<section id="calls">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">05</span><h2>Flagged &amp; Model Calls</h2><p>Coaching material for the huddle — what to fix, and what good sounds like.</p></div>
-    <div class="filterbar">
-      <button class="chip on" data-f="all">All calls</button>
-      <button class="chip" data-f="flag">🚩 Flagged (6)</button>
-      <button class="chip" data-f="model">✅ Model (4)</button>
-    </div>
-    <div class="calls" id="callGrid"></div>
-  </div>
-</section>
-
-<!-- REBUTTALS -->
-<section id="rebuttals">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">06</span><h2>Top Decline Reasons &amp; Rebuttals</h2><p>Member verbatim, paired with the high-converting response. Tap to expand.</p></div>
-    <div class="acc" id="acc"></div>
-  </div>
-</section>
-
-<!-- PLAN -->
-<section id="plan">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">07</span><h2>Action Plan</h2></div>
-    <div class="actions" id="actions"></div>
-  </div>
-</section>
+<!-- empty state -->
+<div class="wrap empty hidden" id="emptyState">
+  <div class="big">No data for this range yet</div>
+  <div>Drop the day’s Aloware / transcript export in the Drive folder and it’ll appear here.</div>
+  <div class="mono" id="emptyRange"></div>
+</div>
 
 <footer>
   <div class="wrap">
-    <span>All figures drawn directly from the July 1, 2026 Aloware export. Metrics are facts; coaching observations are grounded in flagged transcripts and framed as growth opportunities.</span>
-    <span><a href="#top" style="color:var(--green);text-decoration:none;font-weight:700">Back to top ↑</a></span>
+    <span>Figures drawn directly from the Aloware export. Metrics are facts; coaching observations are grounded in flagged transcripts and framed as growth opportunities.</span>
+    <span><a href="#top" style="color:var(--orange);text-decoration:none;font-weight:700">Back to top ↑</a></span>
   </div>
 </footer>
 
 <script>
-/* ---------------- DATA ---------------- */
-const agents = [
-  {name:"Rubilyn Estrada",dials:122,conn:20,sold:5,conv:25.0,dec:0.0},
-  {name:"Christian Buceron",dials:64,conn:19,sold:4,conv:21.1,dec:26.3},
-  {name:"Sitti Besas",dials:168,conn:30,sold:5,conv:16.7,dec:0.0},
-  {name:"Kenneth Semira",dials:94,conn:19,sold:3,conv:15.8,dec:36.8},
-  {name:"Laurice Pentinio",dials:74,conn:28,sold:4,conv:14.3,dec:0.0},
-  {name:"Jemar Namora",dials:109,conn:30,sold:4,conv:13.3,dec:3.3},
-  {name:"Romuel Sabile",dials:160,conn:8,sold:1,conv:12.5,dec:12.5},
-  {name:"Andrea Isabel Balon",dials:97,conn:15,sold:1,conv:6.7,dec:26.7},
-  {name:"Audrey Banares",dials:105,conn:10,sold:0,conv:0.0,dec:0.0},
-  {name:"Chelei Bago",dials:144,conn:10,sold:0,conv:0.0,dec:0.0},
-  {name:"Jesica Jumao-as",dials:114,conn:6,sold:0,conv:0.0,dec:33.3},
-  {name:"Prince Wendell De Luna",dials:202,conn:19,sold:0,conv:0.0,dec:21.1},
-];
+/* ============ DATA (per date, raw counts) ============ */
+const DATASET = {
+  "2026-07-01": {
+    heroTitle: "Today’s problem isn’t connecting. It’s <em>converting</em>.",
+    lede: "Connect rate was low, but that’s a list-quality and dial-timing issue — not a skill gap. The real leak is conversion: only <b>12.6%</b> of connected calls closed, less than half our 30% floor. This is a coaching problem, and it’s fixable.",
+    agents: [
+      {name:"Rubilyn Estrada",dials:122,conn:20,sold:5,dec:0},
+      {name:"Christian Buceron",dials:64,conn:19,sold:4,dec:5},
+      {name:"Sitti Besas",dials:168,conn:30,sold:5,dec:0},
+      {name:"Kenneth Semira",dials:94,conn:19,sold:3,dec:7},
+      {name:"Laurice Pentinio",dials:74,conn:28,sold:4,dec:0},
+      {name:"Jemar Namora",dials:109,conn:30,sold:4,dec:1},
+      {name:"Romuel Sabile",dials:160,conn:8,sold:1,dec:1},
+      {name:"Andrea Isabel Balon",dials:97,conn:15,sold:1,dec:4},
+      {name:"Audrey Banares",dials:105,conn:10,sold:0,dec:0},
+      {name:"Chelei Bago",dials:144,conn:10,sold:0,dec:0},
+      {name:"Jesica Jumao-as",dials:114,conn:6,sold:0,dec:2},
+      {name:"Prince Wendell De Luna",dials:202,conn:19,sold:0,dec:4},
+    ],
+    upsellNum:15, upsellDen:27,
+    dispoDials:[
+      {label:"Unreachable / VM",count:1140,c:"var(--orange)"},
+      {label:"Connected",count:214,c:"var(--good)"},
+      {label:"Busy / Ghost / Invalid",count:61,c:"var(--warn)"},
+      {label:"Blank / uncategorized",count:38,c:"var(--stone)"},
+    ],
+    dispoConn:[
+      {label:"Info provided / resolved (Q)",count:43,c:"var(--warn)"},
+      {label:"Busy / call ended – PG1 (C)",count:43,c:"var(--warn)"},
+      {label:"Already comm / follow-up (B)",count:33,c:"var(--stone)"},
+      {label:"Cancellations (O)",count:29,c:"var(--orange)"},
+      {label:"Sold (D)",count:27,c:"var(--good)"},
+      {label:"Declined (F)",count:24,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:15,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Where the leak is",
+      h:"Four high-volume dialers connected repeatedly and closed nothing.",
+      p:"Connect rate was low (<strong>14.7%</strong>), but that’s list quality and dial timing. The real leak is conversion: <strong>only 12.6% of connected calls closed</strong> — less than half our 30% floor. This is a coaching problem, fixable through disengagement discipline and a cleaner offer-and-close transition."
+    },
+    glaring:{
+      k:"Prince Wendell De Luna · 202 dials (team-high) · 19 connects · 0 closes",
+      h:"The issue isn’t effort — it’s an inability to disengage.",
+      p:"Transcripts show a pattern of pitching past explicit refusals, which is also a compliance exposure. In a <strong>20-min call</strong>, a customer stated upfront he buys clubs, reviews them on YouTube, and returns them — a self-identified serial returner — and Prince pitched a wedge trial anyway. In a <strong>16-min “undecided,”</strong> the member said “we’re wasting time” and “no trial, nothing that involves cash,” yet Prince re-pitched the 30-day trial and read the billing disclosure after the third no. <strong>Stop the tape at the first firm refusal.</strong> Chelei, Audrey, and Jesica share the milder version — good rapport, no clean transition to offer-and-close."
+    },
+    calls:[
+      {type:"flag",who:"Prince Wendell De Luna",disp:"Not interested · 20:48",note:"Pitched a self-declared serial returner for 20 min; no disengage trigger.",url:"https://talk.aloware.io/contacts/138499289/communications/915338720"},
+      {type:"flag",who:"Prince Wendell De Luna",disp:"Undecided · 16:33",note:"Re-pitched trial + read billing disclosure after 3 explicit “no”s — compliance risk.",url:"https://talk.aloware.io/contacts/157164206/communications/915299707"},
+      {type:"flag",who:"Prince Wendell De Luna",disp:"Not interested · 13:25",note:"Member wanted driver only, said “I gotta go”; pushed PG-One trial regardless.",url:"https://talk.aloware.io/contacts/158338331/communications/915040658"},
+      {type:"flag",who:"Christian Buceron",disp:"Auto Bill · 08:33",note:"Warm lead lost on recurring-charge fear — rebuttal opportunity (anchor control).",url:"https://talk.aloware.io/contacts/158494681/communications/915317249"},
+      {type:"flag",who:"Jesica Jumao-as",disp:"Gift decline · 06:25",note:"Offered a 3rd wedge before qualifying need; member already carries 48/52/56/60.",url:"https://talk.aloware.io/contacts/157567342/communications/915336937"},
+      {type:"flag",who:"Andrea Isabel Balon",disp:"Cost / timing · 08:32",note:"“Not right now” — no attempt to book trial to next round.",url:"https://talk.aloware.io/contacts/157670927/communications/915280439"},
+      {type:"model",who:"Rubilyn Estrada",disp:"Service → sale · 14:41",note:"Turned an inbound backorder check into a 4-wedge bundle (50/56/60/63) and captured a new card compliantly via secure link — no numbers read aloud.",url:"https://talk.aloware.io/contacts/137028092/communications/915352082"},
+      {type:"model",who:"Rubilyn Estrada",disp:"Billing disclosure · 02:59",note:"Read full auto-bill terms verbatim ($299/yr day 30; $99/mo VIP day 60) and confirmed “Do you understand and agree?” — the disclosure standard for every close.",url:"https://talk.aloware.io/contacts/158829203/communications/915169559"},
+      {type:"model",who:"Laurice Pentinio",disp:"Warm attach · 08:00",note:"Onboarding check-in that attached a 2nd club (359) and still ran discovery — tied to the member’s tournament the next day.",url:"https://talk.aloware.io/contacts/159081599/communications/915554611"},
+      {type:"model",who:"Christian Buceron",disp:"Locked next step · 21:16",note:"Secured a specific callback (1:30 their time) with his name and direct line — not a vague “I’ll email you.” The fix for our soft-close leak.",url:"https://talk.aloware.io/contacts/158470476/communications/915005714"},
+    ],
+    rebuttals:[
+      {h:"Auto-bill aversion",v:"“I don’t want to do an automatic charge.”",r:"That’s exactly why there’s nothing upfront and a reminder every week showing days left — you’re in full control and can cancel in the app in two taps before day 30."},
+      {h:"Timing / “not right now”",v:"“Not for at least another week — we’ve got the 4th and vacations.”",r:"Let’s activate it so it’s ready the day you tee off — nothing happens until then, and it’s waiting the moment you’re back."},
+      {h:"Not looking / “play for fun”",v:"“We’re not competitive golfers, we just play for fun.”",r:"This isn’t about going pro — it’s about fewer frustrating holes. What’s the one shot that annoys you most out there?"},
+      {h:"Already have the club",v:"“I don’t play enough to spend over $100 on a wedge I’d hardly use.”",r:"Qualify the actual gap before offering a second SKU; lead with the guarantee and the specific shot it fixes, not the bundle price."},
+    ],
+    actions:[
+      {pri:true, t:"Prince Wendell — Priority 1", d:"Live QA on disengagement + refusal-handling; review the two flagged calls. Target: exit within 60 seconds of a firm no."},
+      {t:"Zero-close cohort", d:"Chelei, Audrey, Jesica — offer-transition drill; every connected call must reach a clean offer-and-close, logged in COC."},
+      {t:"Whole team", d:"Deploy the auto-bill “control” rebuttal as tomorrow’s script focus — it surfaced across multiple declines."},
+      {t:"Study the winners", d:"Model Rubilyn’s and Christian’s discovery-to-offer transition in the morning huddle."},
+      {t:"Protect the strength", d:"55.6% upsell rate is excellent — keep the club / VIP attach momentum."},
+    ],
+  }
+};
 
-const dispoDials = [
-  {label:"Unreachable / VM",count:1140,pct:78.5,c:"var(--red)"},
-  {label:"Connected",count:214,pct:14.7,c:"var(--green)"},
-  {label:"Busy / Ghost / Invalid",count:61,pct:4.2,c:"var(--amber)"},
-  {label:"Blank / uncategorized",count:38,pct:2.6,c:"var(--faint)"},
-];
-const dispoConn = [
-  {label:"Info provided / resolved (Q)",count:43,pct:20.1,c:"var(--amber)"},
-  {label:"Busy / call ended – PG1 (C)",count:43,pct:20.1,c:"var(--amber)"},
-  {label:"Already comm / follow-up (B)",count:33,pct:15.4,c:"var(--faint)"},
-  {label:"Cancellations (O)",count:29,pct:13.6,c:"var(--red)"},
-  {label:"Sold (D)",count:27,pct:12.6,c:"var(--green)"},
-  {label:"Declined (F)",count:24,pct:11.2,c:"var(--red)"},
-  {label:"DNC / Callback / Member (G,X)",count:15,pct:7.0,c:"var(--faint)"},
-];
-
-const calls = [
-  {type:"flag",who:"Prince Wendell De Luna",disp:"Not interested · 20:48",note:"Pitched a self-declared serial returner for 20 min; no disengage trigger.",url:"https://talk.aloware.io/contacts/138499289/communications/915338720"},
-  {type:"flag",who:"Prince Wendell De Luna",disp:"Undecided · 16:33",note:"Re-pitched trial + read billing disclosure after 3 explicit “no”s — compliance risk.",url:"https://talk.aloware.io/contacts/157164206/communications/915299707"},
-  {type:"flag",who:"Prince Wendell De Luna",disp:"Not interested · 13:25",note:"Member wanted driver only, said “I gotta go”; pushed PG-One trial regardless.",url:"https://talk.aloware.io/contacts/158338331/communications/915040658"},
-  {type:"flag",who:"Christian Buceron",disp:"Auto Bill · 08:33",note:"Warm lead lost on recurring-charge fear — rebuttal opportunity (anchor control).",url:"https://talk.aloware.io/contacts/158494681/communications/915317249"},
-  {type:"flag",who:"Jesica Jumao-as",disp:"Gift decline · 06:25",note:"Offered a 3rd wedge before qualifying need; member already carries 48/52/56/60.",url:"https://talk.aloware.io/contacts/157567342/communications/915336937"},
-  {type:"flag",who:"Andrea Isabel Balon",disp:"Cost / timing · 08:32",note:"“Not right now” — no attempt to book trial to next round.",url:"https://talk.aloware.io/contacts/157670927/communications/915280439"},
-  {type:"model",who:"Rubilyn Estrada",disp:"Service → sale · 14:41",note:"Turned an inbound backorder check into a 4-wedge bundle (50/56/60/63) and captured a new card compliantly via secure link — no numbers read aloud.",url:"https://talk.aloware.io/contacts/137028092/communications/915352082"},
-  {type:"model",who:"Rubilyn Estrada",disp:"Billing disclosure · 02:59",note:"Read full auto-bill terms verbatim ($299/yr day 30; $99/mo VIP day 60) and confirmed “Do you understand and agree?” — the disclosure standard for every close.",url:"https://talk.aloware.io/contacts/158829203/communications/915169559"},
-  {type:"model",who:"Laurice Pentinio",disp:"Warm attach · 08:00",note:"Onboarding check-in that attached a 2nd club (359) and still ran discovery — tied to the member’s tournament the next day.",url:"https://talk.aloware.io/contacts/159081599/communications/915554611"},
-  {type:"model",who:"Christian Buceron",disp:"Locked next step · 21:16",note:"Secured a specific callback (1:30 their time) with his name and direct line — not a vague “I’ll email you.” The fix for our soft-close leak.",url:"https://talk.aloware.io/contacts/158470476/communications/915005714"},
-];
-
-const rebuttals = [
-  {h:"Auto-bill aversion",v:"“I don’t want to do an automatic charge.”",r:"That’s exactly why there’s nothing upfront and a reminder every week showing days left — you’re in full control and can cancel in the app in two taps before day 30."},
-  {h:"Timing / “not right now”",v:"“Not for at least another week — we’ve got the 4th and vacations.”",r:"Let’s activate it so it’s ready the day you tee off — nothing happens until then, and it’s waiting the moment you’re back."},
-  {h:"Not looking / “play for fun”",v:"“We’re not competitive golfers, we just play for fun.”",r:"This isn’t about going pro — it’s about fewer frustrating holes. What’s the one shot that annoys you most out there?"},
-  {h:"Already have the club",v:"“I don’t play enough to spend over $100 on a wedge I’d hardly use.”",r:"Qualify the actual gap before offering a second SKU; lead with the guarantee and the specific shot it fixes, not the bundle price."},
-];
-
-const actions = [
-  {pri:true, t:"Prince Wendell — Priority 1", d:"Live QA on disengagement + refusal-handling; review the two flagged calls. Target: exit within 60 seconds of a firm no."},
-  {t:"Zero-close cohort", d:"Chelei, Audrey, Jesica — offer-transition drill; every connected call must reach a clean offer-and-close, logged in COC."},
-  {t:"Whole team", d:"Deploy the auto-bill “control” rebuttal as tomorrow’s script focus — it surfaced across multiple declines."},
-  {t:"Study the winners", d:"Model Rubilyn’s and Christian’s discovery-to-offer transition in the morning huddle."},
-  {t:"Protect the strength", d:"55.6% upsell rate is excellent — keep the club / VIP attach momentum."},
-];
-
-/* ---------------- RENDER ---------------- */
+/* ============ HELPERS ============ */
 const $ = s => document.querySelector(s);
+const AVAILABLE = Object.keys(DATASET).sort();          // ISO date strings
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-// Disposition bars
-function renderBars(data, max){
-  const el = $("#dispoBars"); el.innerHTML = "";
-  data.forEach(d=>{
-    const w = (d.pct/max)*100;
-    const row = document.createElement("div");
-    row.className="bar-row";
-    row.innerHTML = `<div class="nm" title="${d.label}">${d.label}</div>
-      <div class="bar-track"><div class="bar-fill" style="background:${d.c}"></div></div>
-      <div class="val">${d.pct}%</div>`;
-    el.appendChild(row);
-    requestAnimationFrame(()=>{ row.querySelector(".bar-fill").style.width = w+"%"; });
+function parseISO(s){ const [y,m,d]=s.split("-").map(Number); return new Date(Date.UTC(y,m-1,d)); }
+function toISO(dt){ return dt.toISOString().slice(0,10); }
+function fmt(s){ const d=parseISO(s); return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`; }
+function isoWeekKey(dt){ // returns {start,end} Monday..Sunday of the week containing dt
+  const day=(dt.getUTCDay()+6)%7; // Mon=0
+  const start=new Date(dt); start.setUTCDate(dt.getUTCDate()-day);
+  const end=new Date(start); end.setUTCDate(start.getUTCDate()+6);
+  return {start,end};
+}
+function datesInRange(sel, gran){
+  const d=parseISO(sel);
+  if(gran==="daily") return AVAILABLE.filter(x=>x===sel);
+  if(gran==="weekly"){ const {start,end}=isoWeekKey(d);
+    return AVAILABLE.filter(x=>{const t=parseISO(x);return t>=start&&t<=end;}); }
+  // monthly
+  return AVAILABLE.filter(x=>{const t=parseISO(x);return t.getUTCMonth()===d.getUTCMonth()&&t.getUTCFullYear()===d.getUTCFullYear();});
+}
+function rangeLabel(sel, gran){
+  const d=parseISO(sel);
+  if(gran==="daily") return fmt(sel);
+  if(gran==="weekly"){ const {start,end}=isoWeekKey(d); return `Week of ${MONTHS[start.getUTCMonth()]} ${start.getUTCDate()} – ${MONTHS[end.getUTCMonth()]} ${end.getUTCDate()}`; }
+  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+}
+
+/* aggregate the given dates into one view model */
+function aggregate(dates){
+  if(!dates.length) return null;
+  const days = dates.map(x=>DATASET[x]);
+  // agents summed by name
+  const amap={};
+  days.forEach(day=>day.agents.forEach(a=>{
+    const g=amap[a.name]||(amap[a.name]={name:a.name,dials:0,conn:0,sold:0,dec:0});
+    g.dials+=a.dials; g.conn+=a.conn; g.sold+=a.sold; g.dec+=a.dec;
+  }));
+  const agents=Object.values(amap).map(a=>({
+    ...a,
+    conv: a.conn? a.sold/a.conn*100 : 0,
+    decp: a.conn? a.dec/a.conn*100 : 0,
+  }));
+  const dials=agents.reduce((s,a)=>s+a.dials,0);
+  const conn=agents.reduce((s,a)=>s+a.conn,0);
+  const sold=agents.reduce((s,a)=>s+a.sold,0);
+  const declined=agents.reduce((s,a)=>s+a.dec,0);
+  const upNum=days.reduce((s,d)=>s+d.upsellNum,0);
+  const upDen=days.reduce((s,d)=>s+d.upsellDen,0);
+  // dispositions summed by label
+  const sumDispo=key=>{ const m={};
+    days.forEach(day=>day[key].forEach(x=>{ const g=m[x.label]||(m[x.label]={label:x.label,count:0,c:x.c}); g.count+=x.count; }));
+    return Object.values(m).sort((a,b)=>b.count-a.count);
+  };
+  const latest=days[days.length-1];
+  return {
+    dials, conn, sold, declined, agents,
+    connRate: dials? conn/dials*100:0,
+    conv: conn? sold/conn*100:0,
+    decRate: conn? declined/conn*100:0,
+    upsell: upDen? upNum/upDen*100:0, upNum, upDen,
+    dispoDials:sumDispo("dispoDials"), dispoConn:sumDispo("dispoConn"),
+    // narrative pieces: from latest day in single-day; concat where it makes sense
+    calls: days.flatMap(d=>d.calls),
+    rebuttals: latest.rebuttals,
+    actions: latest.actions,
+    headline: latest.headline, glaring: latest.glaring,
+    heroTitle: latest.heroTitle, lede: latest.lede,
+    multi: dates.length>1,
+  };
+}
+
+/* ============ STATE ============ */
+let sel = AVAILABLE[AVAILABLE.length-1];   // default latest
+let gran = "daily";
+let dispoView = "dials";
+let callF = "all";
+let sortK = "conv", sortDir = -1;
+
+/* ============ RENDERERS ============ */
+function renderKPIs(vm){
+  const tag=(cls,txt)=>`<span class="tag ${cls}">${txt}</span>`;
+  const rows=[
+    {v:vm.dials.toLocaleString(),l:"Dials",tag:"",bar:100,bc:"var(--stone)"},
+    {v:vm.connRate.toFixed(1)+"%",l:"Connect Rate",tag:tag(vm.connRate>=25?"good":"bad",vm.connRate>=25?"OK":"Low"),bar:Math.min(vm.connRate,100),bc:"var(--warn)"},
+    {v:vm.conv.toFixed(1)+"%",l:"Conversion",tag:tag(vm.conv>=30?"good":"bad",vm.conv>=30?"≥ Floor":"▼ Floor 30%"),bar:Math.min(vm.conv/30*100,100),bc:vm.conv>=30?"var(--good)":"var(--orange)"},
+    {v:vm.decRate.toFixed(1)+"%",l:"Decline Rate",tag:tag(vm.decRate>=20?"bad":"warn","Watch"),bar:Math.min(vm.decRate*3,100),bc:"var(--warn)"},
+    {v:vm.upsell.toFixed(1)+"%",l:"Upsell Rate",tag:tag("good","Strength"),bar:Math.min(vm.upsell,100),bc:"var(--good)"},
+  ];
+  $("#kpis").innerHTML=rows.map(r=>`
+    <div class="kpi">${r.tag}
+      <div class="v">${r.v}</div><div class="l">${r.l}</div>
+      <div class="spark"><i style="background:${r.bc}"></i></div>
+    </div>`).join("");
+  requestAnimationFrame(()=>{
+    document.querySelectorAll("#kpis .spark i").forEach((el,i)=>el.style.width=rows[i].bar+"%");
   });
 }
-let dispoView="dials";
-function drawDispo(){
+
+function renderBars(data){
+  const max=Math.max(...data.map(d=>d.count));
+  const total=data.reduce((s,d)=>s+d.count,0);
+  const el=$("#dispoBars"); el.innerHTML="";
+  data.forEach(d=>{
+    const pct=(d.count/total*100);
+    const row=document.createElement("div");
+    row.className="bar-row";
+    row.innerHTML=`<div class="nm" title="${d.label}">${d.label}</div>
+      <div class="bar-track"><div class="bar-fill" style="background:${d.c}"></div></div>
+      <div class="val">${pct.toFixed(1)}%</div>`;
+    el.appendChild(row);
+    requestAnimationFrame(()=>{ row.querySelector(".bar-fill").style.width=(d.count/max*100)+"%"; });
+  });
+}
+
+function renderDispo(vm){
   if(dispoView==="dials"){
-    renderBars(dispoDials, 78.5);
-    $("#chartTitle").textContent="Team disposition of all 1,453 dials";
-    $("#chartSub").textContent="78.5% of dials never reach a human — a list-quality and timing signal.";
+    renderBars(vm.dispoDials);
+    $("#chartTitle").textContent=`Team disposition of all ${vm.dials.toLocaleString()} dials`;
+    $("#chartSub").textContent="The bulk of dials never reach a human — a list-quality and timing signal.";
   } else {
-    renderBars(dispoConn, 20.1);
-    $("#chartTitle").textContent="Outcomes within the 214 connected calls";
-    $("#chartSub").textContent="Only 12.6% closed — the conversion leak in one view.";
+    renderBars(vm.dispoConn);
+    $("#chartTitle").textContent=`Outcomes within the ${vm.conn.toLocaleString()} connected calls`;
+    $("#chartSub").textContent=`Only ${vm.conv.toFixed(1)}% closed — the conversion leak in one view.`;
   }
 }
-$("#dispoToggle").addEventListener("click", e=>{
-  const b=e.target.closest("button"); if(!b) return;
-  [...e.currentTarget.children].forEach(x=>x.classList.remove("on"));
-  b.classList.add("on"); dispoView=b.dataset.view; drawDispo();
-});
-drawDispo();
 
-// Agent table
-let sortK="conv", sortDir=-1;
-function convClass(v){ return v>=20?"p-good":v>=13?"p-mid":v===0?"p-zero":"p-bad"; }
-function renderTable(){
-  const rows=[...agents].sort((a,b)=>{
-    let r = sortK==="name" ? a.name.localeCompare(b.name) : a[sortK]-b[sortK];
+function convClass(v,sold){ return sold===0?"p-zero":v>=20?"p-good":v>=13?"p-mid":"p-bad"; }
+function renderTable(vm){
+  const rows=[...vm.agents].sort((a,b)=>{
+    let r = sortK==="name"?a.name.localeCompare(b.name):(sortK==="dec"?a.decp-b.decp:a[sortK]-b[sortK]);
     return r*sortDir;
   });
-  const maxConn=Math.max(...agents.map(a=>a.conn));
-  const body=$("#agentBody"); body.innerHTML="";
-  rows.forEach(a=>{
-    const tr=document.createElement("tr");
-    if(a.sold===0) tr.className="zero";
-    tr.innerHTML=`
+  const maxConn=Math.max(...vm.agents.map(a=>a.conn),1);
+  $("#agentBody").innerHTML=rows.map(a=>`
+    <tr class="${a.sold===0?'zero':''}">
       <td class="agent-name">${a.name}</td>
       <td class="num">${a.dials}</td>
       <td class="num">${a.conn}<span class="microbar" style="width:${(a.conn/maxConn*40)|0}px"></span></td>
       <td class="num">${a.sold}</td>
-      <td class="num"><span class="pill ${convClass(a.conv)}">${a.conv.toFixed(1)}</span></td>
-      <td class="num" style="color:${a.dec>=25?'var(--red)':a.dec>0?'var(--amber)':'var(--faint)'}">${a.dec.toFixed(1)}</td>`;
-    body.appendChild(tr);
-  });
+      <td class="num"><span class="pill ${convClass(a.conv,a.sold)}">${a.conv.toFixed(1)}</span></td>
+      <td class="num" style="color:${a.decp>=25?'var(--orange)':a.decp>0?'var(--warn)':'var(--gray-text)'}">${a.decp.toFixed(1)}</td>
+    </tr>`).join("");
   document.querySelectorAll("#agentTable th").forEach(th=>{
-    th.classList.toggle("sorted", th.dataset.k===sortK);
-    const arw=th.querySelector(".arw");
-    arw.textContent = th.dataset.k===sortK ? (sortDir<0?"↓":"↑") : "↕";
+    th.classList.toggle("sorted",th.dataset.k===sortK);
+    th.querySelector(".arw").textContent = th.dataset.k===sortK?(sortDir<0?"↓":"↑"):"↕";
   });
+  // note: top two performers
+  const ranked=[...vm.agents].filter(a=>a.sold>0).sort((a,b)=>b.conv-a.conv);
+  const zeros=vm.agents.filter(a=>a.sold===0).length;
+  $("#agentNote").innerHTML = ranked.length
+    ? `<b style="color:var(--good)">${ranked[0].name}</b> (${ranked[0].conv.toFixed(1)}%) leads the board and sets the internal benchmark. ${zeros} agent${zeros===1?'':'s'} connected but closed nothing — flagged in <b style="color:var(--orange)">orange</b>.`
+    : "No closes in range.";
 }
-document.querySelectorAll("#agentTable th").forEach(th=>{
-  th.addEventListener("click",()=>{
-    const k=th.dataset.k;
-    if(k===sortK){ sortDir*=-1; } else { sortK=k; sortDir = th.dataset.t==="str"?1:-1; }
-    renderTable();
-  });
-});
-renderTable();
 
-// Calls
-function renderCalls(filter="all"){
+function renderCalls(vm){
+  const counts={all:vm.calls.length,flag:vm.calls.filter(c=>c.type==="flag").length,model:vm.calls.filter(c=>c.type==="model").length};
+  $("#callFilter").innerHTML=`
+    <button class="chip ${callF==='all'?'on':''}" data-f="all">All calls (${counts.all})</button>
+    <button class="chip ${callF==='flag'?'on':''}" data-f="flag">🚩 Flagged (${counts.flag})</button>
+    <button class="chip ${callF==='model'?'on':''}" data-f="model">✅ Model (${counts.model})</button>`;
   const g=$("#callGrid"); g.innerHTML="";
-  calls.filter(c=>filter==="all"||c.type===filter).forEach(c=>{
+  vm.calls.filter(c=>callF==="all"||c.type===callF).forEach(c=>{
     const d=document.createElement("div");
-    d.className="call "+c.type;
+    d.className="card call "+c.type;
     d.innerHTML=`
-      <div class="meta">
-        <span class="who">${c.who}</span>
-        <span class="tag2 ${c.type}">${c.type==="flag"?"Flag":"Model"}</span>
-      </div>
+      <div class="meta"><span class="who">${c.who}</span><span class="tag2 ${c.type}">${c.type==="flag"?"Flag":"Model"}</span></div>
       <div class="disp">${c.disp}</div>
       <p class="note">${c.note}</p>
       <a class="rec" href="${c.url}" target="_blank" rel="noopener">▶ Open call ↗</a>`;
     g.appendChild(d);
   });
 }
-document.querySelectorAll(".filterbar .chip").forEach(ch=>{
-  ch.addEventListener("click",()=>{
-    document.querySelectorAll(".filterbar .chip").forEach(x=>x.classList.remove("on"));
-    ch.classList.add("on"); renderCalls(ch.dataset.f);
+
+function renderRebuttals(vm){
+  const acc=$("#acc"); acc.innerHTML="";
+  vm.rebuttals.forEach((r,i)=>{
+    const item=document.createElement("div");
+    item.className="acc-item"+(i===0?" open":"");
+    item.innerHTML=`
+      <button class="acc-btn">▸ ${r.h}<span class="plus">+</span></button>
+      <div class="acc-body"><div class="acc-inner">
+        <p class="verbatim">${r.v}</p>
+        <div class="reb"><b>High-converting rebuttal</b>${r.r}</div>
+      </div></div>`;
+    acc.appendChild(item);
+    const body=item.querySelector(".acc-body");
+    if(i===0) body.style.maxHeight=body.scrollHeight+"px";
+    item.querySelector(".acc-btn").addEventListener("click",()=>{
+      const open=item.classList.toggle("open");
+      body.style.maxHeight=open?body.scrollHeight+"px":"0";
+    });
+  });
+}
+
+function renderNarrative(vm){
+  $("#heroTitle").innerHTML=vm.heroTitle;
+  $("#heroLede").innerHTML=vm.lede;
+  $("#headlineCard").innerHTML=`<div class="k">${vm.headline.k}</div><h3>${vm.headline.h}</h3><p>${vm.headline.p}</p>`;
+  $("#brightCard").innerHTML=`<div class="k">Bright spot</div><div class="big">${vm.upsell.toFixed(1)}%</div>
+    <div class="lbl">of sales carried a second product — <b>${vm.upNum} of ${vm.upDen} sales</b> upsold. Excellent, and worth protecting.</div>`;
+  $("#glaringCard").innerHTML=`<div class="k" style="color:var(--orange)">${vm.glaring.k}</div><h3>${vm.glaring.h}</h3><p>${vm.glaring.p}</p>`;
+  $("#actions").innerHTML=vm.actions.map((a,i)=>`
+    <div class="card action ${a.pri?'pri':''}"><div class="idx">${i+1}</div><div><h4>${a.t}</h4><p>${a.d}</p></div></div>`).join("");
+}
+
+/* ============ MAIN RENDER ============ */
+function render(){
+  const dates=datesInRange(sel,gran);
+  const vm=aggregate(dates);
+  $("#rangeLbl").innerHTML=`Showing <b>${rangeLabel(sel,gran)}</b> · ${dates.length} day${dates.length===1?'':'s'} of data`;
+  $("#topDate").textContent=gran==="daily"?fmt(sel):rangeLabel(sel,gran);
+  $("#heroEyebrow").textContent=({daily:"Daily",weekly:"Weekly",monthly:"Monthly"}[gran])+" Performance & QA Summary";
+
+  const empty=!vm;
+  $("#dashboard").classList.toggle("hidden",empty);
+  $("#emptyState").classList.toggle("hidden",!empty);
+  if(empty){ $("#emptyRange").textContent=rangeLabel(sel,gran); return; }
+
+  renderNarrative(vm);
+  renderKPIs(vm);
+  renderDispo(vm);
+  renderTable(vm);
+  renderCalls(vm);
+  renderRebuttals(vm);
+}
+
+/* ============ WIRE UP CONTROLS ============ */
+const dp=$("#datePick");
+dp.value=sel; dp.min=AVAILABLE[0]; dp.max=AVAILABLE[AVAILABLE.length-1];
+dp.addEventListener("change",()=>{ if(dp.value){ sel=dp.value; render(); syncNav(); } });
+
+$("#granSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  [...e.currentTarget.children].forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); gran=b.dataset.g; render(); syncNav();
+});
+
+function shiftDay(delta){
+  const d=parseISO(sel); d.setUTCDate(d.getUTCDate()+delta);
+  const iso=toISO(d);
+  if(iso>=dp.min && iso<=dp.max){ sel=iso; dp.value=iso; render(); syncNav(); }
+}
+$("#prevDay").addEventListener("click",()=>shiftDay(-1));
+$("#nextDay").addEventListener("click",()=>shiftDay(1));
+function syncNav(){
+  $("#prevDay").disabled = sel<=dp.min;
+  $("#nextDay").disabled = sel>=dp.max;
+  document.querySelectorAll(".quickday").forEach(q=>q.classList.toggle("on",q.dataset.d===sel));
+}
+
+// quick-pick chips for available data days
+$("#quickDays").innerHTML=AVAILABLE.map(d=>`<button class="quickday" data-d="${d}">${MONTHS[parseISO(d).getUTCMonth()]} ${parseISO(d).getUTCDate()}</button>`).join("");
+$("#quickDays").addEventListener("click",e=>{
+  const b=e.target.closest(".quickday"); if(!b)return;
+  sel=b.dataset.d; dp.value=sel; render(); syncNav();
+});
+
+$("#dispoToggle").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  [...e.currentTarget.children].forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); dispoView=b.dataset.view; renderDispo(aggregate(datesInRange(sel,gran)));
+});
+$("#callFilter").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b)return;
+  callF=b.dataset.f; renderCalls(aggregate(datesInRange(sel,gran)));
+});
+document.querySelectorAll("#agentTable th").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const k=th.dataset.k;
+    if(k===sortK) sortDir*=-1; else { sortK=k; sortDir=th.dataset.t==="str"?1:-1; }
+    renderTable(aggregate(datesInRange(sel,gran)));
   });
 });
-renderCalls();
 
-// Rebuttals
-const acc=$("#acc");
-rebuttals.forEach((r,i)=>{
-  const item=document.createElement("div");
-  item.className="acc-item"+(i===0?" open":"");
-  item.innerHTML=`
-    <button class="acc-btn">▸ ${r.h}<span class="plus">+</span></button>
-    <div class="acc-body"><div class="acc-inner">
-      <p class="verbatim">${r.v}</p>
-      <div class="reb"><b>High-converting rebuttal</b>${r.r}</div>
-    </div></div>`;
-  acc.appendChild(item);
-  const body=item.querySelector(".acc-body");
-  if(i===0) body.style.maxHeight=body.scrollHeight+"px";
-  item.querySelector(".acc-btn").addEventListener("click",()=>{
-    const open=item.classList.toggle("open");
-    body.style.maxHeight = open ? body.scrollHeight+"px" : "0";
-  });
-});
-
-// Actions
-const ac=$("#actions");
-actions.forEach((a,i)=>{
-  const d=document.createElement("div");
-  d.className="card action"+(a.pri?" pri":"");
-  d.innerHTML=`<div class="idx">${i+1}</div><div><h4>${a.t}</h4><p>${a.d}</p></div>`;
-  ac.appendChild(d);
-});
+render(); syncNav();
 </script>
 </body>
 </html>
