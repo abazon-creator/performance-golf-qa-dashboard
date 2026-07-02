@@ -457,6 +457,72 @@ const DATASET = {
       {t:"Study the winners", d:"Model Rubilyn’s and Christian’s discovery-to-offer transition in the morning huddle."},
       {t:"Protect the strength", d:"55.6% upsell rate is excellent — keep the club / VIP attach momentum."},
     ],
+  },
+  "2026-07-02": {
+    heroTitle: "Conversion is climbing — <em>17.7%</em> — but the offer-rate leak holds.",
+    lede: "Conversion rose 5 points day-over-day to <b>17.7%</b>, still under the 30% floor. <b>112 of 186</b> connected calls ended in follow-up, call-ended, or info-only — offers skipped before the close. Connect rate stays low (76.8% unreachable), a list &amp; timing issue.",
+    agents: [
+      {name:"Laurice Pentinio",dials:63,conn:13,sold:6,dec:1},
+      {name:"Romuel Sabile",dials:90,conn:8,sold:2,dec:1},
+      {name:"Andrea Isabel Balon",dials:77,conn:14,sold:3,dec:2},
+      {name:"Audrey Banares",dials:120,conn:14,sold:3,dec:0},
+      {name:"Christian Buceron",dials:84,conn:19,sold:4,dec:1},
+      {name:"Sitti Besas",dials:152,conn:36,sold:7,dec:2},
+      {name:"Jemar Namora",dials:89,conn:41,sold:5,dec:2},
+      {name:"Rubilyn Estrada",dials:121,conn:18,sold:2,dec:2},
+      {name:"Chelei Bago",dials:173,conn:10,sold:1,dec:1},
+      {name:"Prince Wendell De Luna",dials:200,conn:12,sold:0,dec:1},
+      {name:"Jesica Jumao-as",dials:4,conn:1,sold:0,dec:0},
+    ],
+    upsellNum:18, upsellDen:33,
+    dispoDials:[
+      {label:"Unreachable / VM",count:901,c:"var(--orange)"},
+      {label:"Connected",count:186,c:"var(--good)"},
+      {label:"Blank / uncategorized",count:44,c:"var(--stone)"},
+      {label:"Busy / Ghost / Invalid",count:42,c:"var(--warn)"},
+    ],
+    dispoConn:[
+      {label:"Already comm / follow-up (B)",count:52,c:"var(--stone)"},
+      {label:"Call ended – PG1 (C)",count:36,c:"var(--warn)"},
+      {label:"Sold (D)",count:33,c:"var(--good)"},
+      {label:"Info provided / resolved (Q)",count:24,c:"var(--warn)"},
+      {label:"Cancellations (O)",count:17,c:"var(--orange)"},
+      {label:"Declined (F)",count:13,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:11,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Where the leak is",
+      h:"112 connected calls never reached a clean offer.",
+      p:"Conversion improved to <strong>17.7%</strong> (from 12.6%), but of 186 connected calls only 33 closed. <strong>52</strong> ended in already-communicated / follow-up, <strong>36</strong> in call-ended (PG1), and <strong>24</strong> in information-only — that’s where offers are skipped or lost mid-conversation. Connect rate stays structurally low (76.8% Unreachable/VM): a list-quality and dial-timing issue, not a skill gap."
+    },
+    glaring:{
+      k:"Prince Wendell De Luna · 200 dials (team-high) · 12 connects · 0 closes",
+      h:"Effort isn’t the issue — his dial queue is.",
+      p:"Prince again led the team in volume, but most of his connects were <strong>very short post-purchase / order-status follow-ups</strong> (20–90-second PPSD and PG-One check-ins) that structurally don’t convert. His one genuine sales conversation — Roger Self, 13:50, declined on time — was winnable. <strong>Opportunity:</strong> rebalance his lead allocation toward sellable leads and QA the Roger Self call for offer-transition."
+    },
+    calls:[
+      {type:"flag",who:"Prince Wendell De Luna",disp:"Declined / Time · 13:50",note:"Customer “happy with my game,” doesn’t watch videos; no urgency created around the short-game gap he admitted.",url:"https://talk.aloware.io/contacts/154529182/communications/916056014"},
+      {type:"flag",who:"Rubilyn Estrada",disp:"Not interested · 23:59",note:"24-minute call, no close; lost on price anchoring — “I don’t have $600 to throw at you.”",url:"https://talk.aloware.io/contacts/153117718/communications/916037021"},
+      {type:"flag",who:"Chelei Bago",disp:"Just bought · 12:32",note:"Onboarding call, member “just busy”; pitched a trial before establishing value.",url:"https://talk.aloware.io/contacts/158906733/communications/915682494"},
+      {type:"model",who:"Laurice Pentinio",disp:"Sold PG1+VIP · 12:25",note:"Post-purchase check-in converted to a VIP coaching trial with clean conditions. Top closer today (46.2%).",url:"https://talk.aloware.io/contacts/158562807/communications/915677002"},
+      {type:"model",who:"Audrey Bañares",disp:"Sold PG1 + Upsell · 35:52",note:"Re-engaged a loyal customer returning after a 3-year injury hiatus; multi-item close (app/VIP + SF-One Driver + putter).",url:"https://talk.aloware.io/contacts/159133549/communications/915898933"},
+      {type:"model",who:"Andrea Isabel Balon",disp:"Sold Physical + Upsell · 34:38",note:"Resolved a technical issue, ran discovery, closed a wedge and attempted the bundle.",url:"https://talk.aloware.io/contacts/157356146/communications/915716353"},
+      {type:"model",who:"Sitti Besas",disp:"Sold Physical + Upsell · 26:18",note:"Closed a $299 SF-One Driver and extended 30/60-day trials despite premium resistance.",url:"https://talk.aloware.io/contacts/159139168/communications/915973781"},
+    ],
+    rebuttals:[
+      {h:"Cost / already spent",v:"“I spent a lot of money with you guys already… I don’t have $600 I can just throw at you.”",r:"Anchor to a single SKU, not a bundle, and lead with the risk-free guarantee: you only keep it if it outperforms what’s already in your bag."},
+      {h:"Just bought / busy",v:"“Yeah, just busy.”",r:"Don’t pitch a third product cold. Book a 5-minute onboarding tied to their next round so the club they just bought performs — the attach comes after value."},
+      {h:"Time / happy with my game",v:"“Right now I feel pretty happy… I don’t watch a lot of online stuff.”",r:"Reframe from “training videos” to “the one shot you’d want back,” tying to the mishit they admitted (coming up short)."},
+      {h:"No more clubs",v:"“I don’t want to go any further with buying more clubs.”",r:"Pivot from hardware to the free app / coaching to preserve the relationship and set up a future attach."},
+    ],
+    actions:[
+      {pri:true, t:"Prince Wendell — Priority 1", d:"Audit lead allocation — 200 dials skewed to post-purchase / order-status follow-ups; route sellable leads to his queue and QA the Roger Self attempt."},
+      {t:"Rubilyn Estrada", d:"Two long no-close calls — coach single-SKU price anchoring and a guarantee-led close."},
+      {t:"Whole team", d:"Conversion up to 17.7% (from 12.6%) — good direction, still below the 30% floor. Attack the offer-rate leak in the 112 connected calls that ended in follow-up / call-ended / info-only."},
+      {t:"Study the winners", d:"Laurice’s post-purchase-to-VIP transition, Audrey’s re-engagement, Andrea’s tech-to-sale pivot — use in the huddle."},
+      {t:"Protect the strength", d:"54.5% upsell (18/33) — PG1+VIP and club attach momentum is strong."},
+      {t:"Kenneth Semira", d:"Zero dials logged today — confirm absence / schedule."},
+    ],
   }
 };
 
