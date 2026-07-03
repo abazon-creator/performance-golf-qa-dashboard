@@ -36,7 +36,24 @@ function rebuttalFor(reason){ return REBUTTALS[reason] || 'Qualify the specific 
 
 // ------------------------------- ENTRY POINTS -------------------------------
 function main()    { run_(false); }   // <- point the daily trigger at this
-function testRun() { run_(true);  }   // <- run manually first: computes + logs, no Doc/GitHub writes, no state change
+
+// Run manually to VALIDATE: force-processes the most recent CSV, logs metrics,
+// writes NOTHING (no Doc, no GitHub, no state change). Ignores the processed list.
+function testRun(){
+  var cands = listNewFiles_([]);                 // empty processed -> every file counts
+  if (!cands.length){ Logger.log('No "'+CFG.FILE_PREFIX+'*" CSV found in the drop folder.'); return; }
+  cands.sort(function(a,b){ return a.iso < b.iso ? 1 : -1; });   // newest first
+  var c = cands[0];
+  var rows = Utilities.parseCsv(c.file.getBlob().getDataAsString('UTF-8'));
+  var day = analyze_(c.iso, rows);
+  Logger.log('FILE:    ' + c.name + '  (' + c.iso + ')');
+  Logger.log('METRICS: ' + JSON.stringify(day.metrics));
+  Logger.log('AGENTS:  ' + day.agentList.length + '   GLARING: ' + (day.glaringAgent ? day.glaringAgent.name + ' (' + day.glaringAgent.dials + ' dials, ' + day.glaringAgent.sold + ' sold)' : '-'));
+  Logger.log('FLAGGED: ' + day.flagged.map(function(f){ return f.who + ' — ' + f.disp; }).join('  |  '));
+  Logger.log('MODEL:   ' + day.model.map(function(f){ return f.who + ' — ' + f.disp; }).join('  |  '));
+  Logger.log('REBUTTAL REASONS: ' + day.rebuttals.map(function(r){ return r.h; }).join(', '));
+  Logger.log('--- testRun OK: nothing was written. Now run installDailyTrigger to schedule it. ---');
+}
 
 // ------------------------------- CORE -------------------------------
 function run_(dryRun){
