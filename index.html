@@ -390,6 +390,119 @@
 /* ============ DATA (per date, raw counts) ============ */
 const DATASET = {
   /* __NEW_DAY__ */
+  "2026-07-05": {
+    heroTitle: "Follow-up Sunday — <em>41.1%</em> connect, but mostly post-purchase check-ins.",
+    lede: "A Sunday skewed to service: 117 of 285 dials connected (<b>41.1%</b>), but 80 were already-communicated / post-purchase follow-ups. Only 9 sales (7.7% conv) — though upsell was excellent at <b>66.7%</b> (6/9), and Romuel landed a 72-minute PG1+VIP close.",
+    agents: [
+      {name:"Rubilyn Estrada",dials:30,conn:10,sold:4,dec:1},
+      {name:"Sitti Besas",dials:83,conn:6,sold:2,dec:0},
+      {name:"Romuel Sabile",dials:22,conn:7,sold:1,dec:1},
+      {name:"Laurice Pentinio",dials:53,conn:31,sold:2,dec:0},
+      {name:"Jemar Namora",dials:73,conn:48,sold:0,dec:0},
+      {name:"Prince Wendell De Luna",dials:19,conn:15,sold:0,dec:0},
+      {name:"Audrey Banares",dials:5,conn:0,sold:0,dec:0},
+    ],
+    upsellNum:6, upsellDen:9,
+    dispoDials:[
+      {label:"Unreachable / VM",count:152,c:"var(--orange)"},
+      {label:"Connected",count:117,c:"var(--good)"},
+      {label:"Blank / uncategorized",count:11,c:"var(--stone)"},
+      {label:"Busy / Ghost / Invalid",count:5,c:"var(--warn)"},
+    ],
+    dispoConn:[
+      {label:"Already comm / follow-up (B)",count:80,c:"var(--stone)"},
+      {label:"Call ended – PG1 (C)",count:15,c:"var(--warn)"},
+      {label:"Sold (D)",count:9,c:"var(--good)"},
+      {label:"DNC / Callback / Member (G,X)",count:5,c:"var(--stone)"},
+      {label:"Info provided / resolved (Q)",count:4,c:"var(--warn)"},
+      {label:"Cancellations (O)",count:2,c:"var(--orange)"},
+      {label:"Declined (F)",count:2,c:"var(--orange)"},
+    ],
+    headline:{
+      k:"A service day, not a sales day",
+      h:"41.1% connect — but 80 of 117 were follow-ups.",
+      p:"Connect looked great (<strong>41.1%</strong>), but the mix was post-purchase: 80 already-communicated check-ins vs only 9 sales, so conversion was 7.7%. The bright spot — <strong>6 of 9 sales upsold (66.7%)</strong>, and Romuel closed a 72-minute PG1+VIP. On a light Sunday, the volume simply wasn’t sellable leads."
+    },
+    glaring:{
+      k:"Jemar Namora · 73 dials · 48 connects · 0 closes",
+      h:"48 connects, zero offers.",
+      p:"Jemar connected 48 times and closed nothing — nearly all were post-purchase follow-ups, not sales conversations. Prince did the same (15 connects, 0). <strong>Opportunity:</strong> add at least a soft offer to service calls, and weight weekend queues toward sellable leads."
+    },
+    calls:[
+      {type:"flag",who:"Rubilyn Estrada",disp:"Declined / Undecided · 11:12",note:"“Me taking one thing at a time” — start with one club and one shot, a small first win.",url:"https://talk.aloware.io/contacts/159301645/communications/917128748"},
+      {type:"flag",who:"Romuel Sabile",disp:"Declined / Gift · 08:08",note:"Recipient-fit objection (“I don’t like him”) — confirm the gift fit or offer an alternative.",url:"https://talk.aloware.io/contacts/159263745/communications/917082057"},
+      {type:"model",who:"Romuel Sabile",disp:"Sold PG1+VIP · 1:12:06",note:"72-minute marathon close — the day’s standout coaching-bundle sale.",url:"https://talk.aloware.io/contacts/159324072/communications/917092763"},
+      {type:"model",who:"Rubilyn Estrada",disp:"Sold PG1+VIP · 21:43",note:"Clean coaching-bundle close.",url:"https://talk.aloware.io/contacts/159332132/communications/917196529"},
+      {type:"model",who:"Laurice Pentinio",disp:"Sold PG1+VIP · 12:19",note:"Efficient VIP close on a service-heavy day.",url:"https://talk.aloware.io/contacts/137258501/communications/917060034"},
+      {type:"model",who:"Sitti Besas",disp:"Sold Physical + Upsell · 07:54",note:"Quick physical sale with an attach.",url:"https://talk.aloware.io/contacts/159326227/communications/917086103"},
+    ],
+    rebuttals:[
+      {h:"Undecided",v:"“Me taking one thing at a time.”",r:"Start with one club and one shot — a small first win beats a big commitment."},
+      {h:"Gift (recipient fit)",v:"“I don’t like him.”",r:"Confirm who it’s really for and what fits their game; offer an alternative SKU or a gift option."},
+    ],
+    actions:[
+      {pri:true, t:"Jemar & Prince — service-call offers", d:"48 + 15 connects, 0 offers — coach a soft offer on every service/follow-up call."},
+      {t:"Study the winners", d:"Romuel’s 72-min PG1+VIP marathon; Rubilyn 40% (4 closes)."},
+      {t:"Protect the strength", d:"66.7% upsell (6/9) — attach momentum is excellent even on low volume."},
+      {t:"Weekend queue", d:"41.1% connect was mostly post-purchase — weight Sunday lists toward sellable leads."},
+    ],
+  },
+  "2026-07-03": {
+    heroTitle: "Best day of the week — <em>26.2%</em> conversion on a light Friday.",
+    lede: "A short pre-holiday Friday (5 agents, 451 dials) but the <b>strongest conversion of the week at 26.2%</b> (21/80). Rubilyn (47.4%) and Jemar (9 closes) carried it. Upsell dipped to 14.3% — mostly physical-product sales without an attach.",
+    agents: [
+      {name:"Audrey Banares",dials:44,conn:4,sold:2,dec:0},
+      {name:"Rubilyn Estrada",dials:93,conn:19,sold:9,dec:0},
+      {name:"Jemar Namora",dials:128,conn:31,sold:9,dec:2},
+      {name:"Sitti Besas",dials:77,conn:16,sold:1,dec:0},
+      {name:"Romuel Sabile",dials:109,conn:10,sold:0,dec:2},
+    ],
+    upsellNum:3, upsellDen:21,
+    dispoDials:[
+      {label:"Unreachable / VM",count:338,c:"var(--orange)"},
+      {label:"Connected",count:80,c:"var(--good)"},
+      {label:"Busy / Ghost / Invalid",count:24,c:"var(--warn)"},
+      {label:"Blank / uncategorized",count:9,c:"var(--stone)"},
+    ],
+    dispoConn:[
+      {label:"Sold (D)",count:21,c:"var(--good)"},
+      {label:"Info provided / resolved (Q)",count:19,c:"var(--warn)"},
+      {label:"Call ended – PG1 (C)",count:15,c:"var(--warn)"},
+      {label:"Cancellations (O)",count:13,c:"var(--orange)"},
+      {label:"Already comm / follow-up (B)",count:4,c:"var(--stone)"},
+      {label:"Declined (F)",count:4,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:2,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Conversion breakout",
+      h:"26.2% — the closest to the 30% floor all week.",
+      p:"On just 80 connected calls the team closed 21 (<strong>26.2%</strong>). <strong>Rubilyn Estrada converted 47.4%</strong> (9/19) and Jemar Namora 29.0% (9/31). Volume was light ahead of July 4, but the offer-to-close execution was the best of the week. The soft spot was attach — only 3 of 21 sales upsold (14.3%)."
+    },
+    glaring:{
+      k:"Romuel Sabile · 109 dials (team-high) · 10 connects · 0 closes",
+      h:"High dials, no closes on the light day.",
+      p:"Team-high 109 dials but only 10 connects and no sale; his two engaged connects declined on time and backorder. Review his connect-to-offer transition — the volume is there, the conversion isn’t."
+    },
+    calls:[
+      {type:"flag",who:"Romuel Sabile",disp:"Declined / Time · 21:14",note:"21-min call, no close — timing stall; activate now so it’s ready their next round.",url:"https://talk.aloware.io/contacts/158343973/communications/916667208"},
+      {type:"flag",who:"Jemar Namora",disp:"Declined / Just bought · 09:16",note:"“I’ll consider after I hit it” — book an onboarding; the attach comes after value.",url:"https://talk.aloware.io/contacts/122857894/communications/916463078"},
+      {type:"model",who:"Jemar Namora",disp:"Sold Physical · 29:10",note:"Longest close of the day — deep discovery into a physical-product sale.",url:"https://talk.aloware.io/contacts/127568446/communications/916701458"},
+      {type:"model",who:"Rubilyn Estrada",disp:"Sold Physical · 25:26",note:"Part of a 9-close day at 47.4% conversion.",url:"https://talk.aloware.io/contacts/158582921/communications/916554168"},
+      {type:"model",who:"Audrey Banares",disp:"Sold PG1 + Upsell Clubs · 18:38",note:"The day’s clean attach — PG1 plus a club upsell.",url:"https://talk.aloware.io/contacts/159186565/communications/916567379"},
+      {type:"model",who:"Sitti Besas",disp:"Sold Physical · 09:20",note:"Efficient physical-product close.",url:"https://talk.aloware.io/contacts/151122198/communications/916619905"},
+    ],
+    rebuttals:[
+      {h:"Time",v:"“I don’t know.”",r:"Activate now so it’s ready their next round; nothing happens until they tee off."},
+      {h:"Just bought",v:"“I’ll consider after I hit it and see what I like about it.”",r:"Book a 5-minute onboarding tied to that first round — the attach comes after the value shows up."},
+      {h:"Backorder",v:"(order still shipping)",r:"Set the delivery expectation and book a follow-up for the day it lands — carry the momentum."},
+    ],
+    actions:[
+      {pri:true, t:"Romuel Sabile — Priority", d:"Team-high 109 dials, 0 closes — connect-to-offer transition QA."},
+      {t:"Study the winners", d:"Rubilyn 47.4% (9 closes), Jemar 29.0% (9 closes), Audrey 50% (2/4)."},
+      {t:"Attach gap", d:"Only 14.3% upsell today — push a PG1/VIP or club attach on physical-product sales."},
+      {t:"Staffing", d:"Only 5 agents dialed (pre-July-4) — expected, note for weekly context."},
+    ],
+  },
   "2026-06-30": {
     heroTitle: "Conversion at <em>11.4%</em> — well under the 30% floor.",
     lede: "Team Anne ran <b>1,329</b> dials at a healthy <b>20.4%</b> connect, but converted just <b>11.4%</b> (31/271). 136 connected calls ended in follow-up, call-ended, or info-only, and 70 were cancellations. Upsell stayed strong at <b>58.1%</b>.",
