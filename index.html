@@ -390,6 +390,131 @@
 /* ============ DATA (per date, raw counts) ============ */
 const DATASET = {
   /* __NEW_DAY__ */
+  "2026-07-07": {
+    heroTitle: "Conversion at <em>20.0%</em> — but three agents dialed all day with zero closes.",
+    lede: "1,278 dials, though connect slipped to <b>12.9%</b>. Of those who connected, <b>20.0%</b> closed (33/165) with a strong <b>51.5%</b> upsell. The catch: Andrea, Romuel, and Prince made 521 dials between them and closed nothing — while Christian (45.5%), Kenneth (29.2%) and Sitti (25.9%) carried the day.",
+    agents: [
+      {name:"Christian Buceron",dials:53,conn:11,sold:5,dec:2},
+      {name:"Kenneth Semira",dials:62,conn:24,sold:7,dec:3},
+      {name:"Rubilyn Estrada",dials:119,conn:14,sold:4,dec:2},
+      {name:"Sitti Besas",dials:175,conn:27,sold:7,dec:1},
+      {name:"Laurice Pentinio",dials:85,conn:20,sold:5,dec:3},
+      {name:"Chelei Bago",dials:124,conn:10,sold:2,dec:1},
+      {name:"Audrey Banares",dials:139,conn:16,sold:3,dec:1},
+      {name:"Romuel Sabile",dials:168,conn:8,sold:0,dec:2},
+      {name:"Prince Wendell De Luna",dials:163,conn:14,sold:0,dec:1},
+      {name:"Andrea Isabel Balon",dials:190,conn:21,sold:0,dec:1},
+    ],
+    upsellNum:17, upsellDen:33,
+    dispoDials:[
+      {label:"Unreachable / VM",count:1016,c:"var(--orange)"},
+      {label:"Connected",count:165,c:"var(--good)"},
+      {label:"Busy / Ghost / Invalid",count:55,c:"var(--warn)"},
+      {label:"Blank / uncategorized",count:42,c:"var(--stone)"},
+    ],
+    dispoConn:[
+      {label:"Already comm / follow-up (B)",count:37,c:"var(--stone)"},
+      {label:"Sold (D)",count:33,c:"var(--good)"},
+      {label:"Call ended – PG1 (C)",count:32,c:"var(--warn)"},
+      {label:"Info provided / resolved (Q)",count:23,c:"var(--warn)"},
+      {label:"Declined (F)",count:17,c:"var(--orange)"},
+      {label:"Cancellations (O)",count:14,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:9,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Top-heavy day",
+      h:"20.0% conversion, but three zero-close dialers.",
+      p:"Connect dipped to 12.9% (165/1,278). The closers were excellent — <strong>Christian 45.5%, Kenneth 29.2%, Rubilyn 28.6%, Sitti 25.9%</strong> (7 closes) — lifting conversion to 20.0% with 51.5% upsell. But <strong>Andrea (190 dials), Romuel (168) and Prince (163) combined for 521 dials and 0 sales</strong> — a lead-quality and offer-transition drag."
+    },
+    glaring:{
+      k:"Andrea Isabel Balon · 190 dials (team-high) · 21 connects · 0 closes",
+      h:"Team-high dials, zero closes — a sharp reversal.",
+      p:"Andrea led the team in dials and connected 21 times but closed nothing — a surprising drop after converting <strong>22.7% the day before</strong>. Romuel (168 dials) and Prince (163) also went scoreless. Prioritize Andrea for QA: what changed between July 6 and 7?"
+    },
+    calls:[
+      {type:"flag",who:"Sitti Besas",disp:"Declined / Not interested · 17:08",note:"Return-policy anxiety (“use it 30 days and don’t like it, how do I get it back?”) — lead with the guarantee to remove the risk.",url:"https://talk.aloware.io/contacts/149199559/communications/918786096"},
+      {type:"flag",who:"Christian Buceron",disp:"Declined / Not interested · 12:28",note:"Flat “not interested at this point” after 12 min — qualify the one shot before pitching.",url:"https://talk.aloware.io/contacts/103649506/communications/918513002"},
+      {type:"flag",who:"Laurice Pentinio",disp:"Declined / Undecided · 12:13",note:"“I don’t play a lot” — reframe to low-commitment, one-club start.",url:"https://talk.aloware.io/contacts/159761800/communications/918951823"},
+      {type:"model",who:"Christian Buceron",disp:"Sold Physical · 30:34",note:"Longest close of the day on a 45.5% conversion performance.",url:"https://talk.aloware.io/contacts/101443381/communications/918595798"},
+      {type:"model",who:"Sitti Besas",disp:"Sold PG1+VIP · 25:39",note:"Coaching-bundle close; 7 sales on the day.",url:"https://talk.aloware.io/contacts/92864088/communications/918678734"},
+      {type:"model",who:"Chelei Bago",disp:"Sold PG1+VIP · 24:07",note:"Clean VIP close.",url:"https://talk.aloware.io/contacts/159296048/communications/918186654"},
+      {type:"model",who:"Audrey Banares",disp:"Sold Training Programs · 16:04",note:"Program sale — variety in the close mix.",url:"https://talk.aloware.io/contacts/144052531/communications/919044559"},
+    ],
+    rebuttals:[
+      {h:"Not interested",v:"“I’m not interested in doing that at this point.”",r:"Reframe from the product to the one shot that annoys them most, and lead with the risk-free guarantee."},
+      {h:"Return anxiety",v:"“Use it 30 days and don’t like it — how do I get it back?”",r:"Make the guarantee the opener: keep it only if it outperforms what’s in the bag; returns are simple and free."},
+      {h:"Undecided",v:"“I don’t play a lot.”",r:"Low-commitment start — one club, one shot; the app meets them at their pace."},
+    ],
+    actions:[
+      {pri:true, t:"Andrea Isabel Balon — Priority", d:"190 dials, 0 closes — QA against her 22.7% on July 6; find the regression in the offer-transition."},
+      {t:"Romuel & Prince", d:"331 dials, 0 closes combined — queue quality + connect-to-offer transition."},
+      {t:"Study the winners", d:"Christian 45.5%, Kenneth 29.2%, Sitti 25.9% (7 closes) — model their discovery-to-offer."},
+      {t:"Protect the strength", d:"51.5% upsell (17/33) — attach momentum is strong."},
+    ],
+  },
+  "2026-07-06": {
+    heroTitle: "A full weekday — <em>17.8%</em> conversion, 42 closes, six agents above 20%.",
+    lede: "Back to full volume (1,338 dials, 10 agents). Conversion held at <b>17.8%</b> (42/236) with a strong <b>47.6%</b> upsell (20/42). Six agents cleared 20% — Rubilyn (28.6%), Christian &amp; Kenneth (24%), Sitti (23.5%), Andrea (22.7%). Decline ticked up to 10.6%.",
+    agents: [
+      {name:"Rubilyn Estrada",dials:129,conn:21,sold:6,dec:5},
+      {name:"Sitti Besas",dials:134,conn:34,sold:8,dec:2},
+      {name:"Prince Wendell De Luna",dials:199,conn:26,sold:3,dec:2},
+      {name:"Romuel Sabile",dials:163,conn:15,sold:1,dec:2},
+      {name:"Christian Buceron",dials:63,conn:25,sold:6,dec:3},
+      {name:"Kenneth Semira",dials:109,conn:25,sold:6,dec:5},
+      {name:"Chelei Bago",dials:165,conn:14,sold:1,dec:2},
+      {name:"Andrea Isabel Balon",dials:131,conn:22,sold:5,dec:1},
+      {name:"Laurice Pentinio",dials:105,conn:36,sold:3,dec:2},
+      {name:"Audrey Banares",dials:140,conn:18,sold:3,dec:1},
+    ],
+    upsellNum:20, upsellDen:42,
+    dispoDials:[
+      {label:"Unreachable / VM",count:1008,c:"var(--orange)"},
+      {label:"Connected",count:236,c:"var(--good)"},
+      {label:"Busy / Ghost / Invalid",count:56,c:"var(--warn)"},
+      {label:"Blank / uncategorized",count:38,c:"var(--stone)"},
+    ],
+    dispoConn:[
+      {label:"Already comm / follow-up (B)",count:76,c:"var(--stone)"},
+      {label:"Sold (D)",count:42,c:"var(--good)"},
+      {label:"Call ended – PG1 (C)",count:38,c:"var(--warn)"},
+      {label:"Info provided / resolved (Q)",count:26,c:"var(--warn)"},
+      {label:"Declined (F)",count:25,c:"var(--orange)"},
+      {label:"Cancellations (O)",count:19,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:10,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Solid, broad-based day",
+      h:"42 closes, six agents above 20% conversion.",
+      p:"1,338 dials → 236 connects (17.6%) → 42 sold (17.8%). Depth was the story: <strong>Rubilyn 28.6%, Christian 24%, Kenneth 24%, Sitti 23.5%, Andrea 22.7%</strong> all cleared the bar, and upsell was strong at 47.6%. Watch decline (10.6%) — Rubilyn (23.8%) and Kenneth (20%) closed well but also declined a lot."
+    },
+    glaring:{
+      k:"Romuel Sabile · 163 dials · 15 connects · 1 close (6.7%)",
+      h:"High volume, lowest conversion.",
+      p:"163 dials but only 15 connects and one sale. <strong>Prince</strong> carried a team-high 199 dials for 11.5%. Both are dialing hard into low-yield lists — review queue quality and the connect-to-offer transition."
+    },
+    calls:[
+      {type:"flag",who:"Romuel Sabile",disp:"Declined / Undecided · 15:25",note:"15-min, no close — stalled on indecision; guide to one concrete next step.",url:"https://talk.aloware.io/contacts/159332169/communications/917341479"},
+      {type:"flag",who:"Andrea Isabel Balon",disp:"Declined / Not interested · 14:26",note:"Account/login friction derailed the pitch (“it keeps not letting me…”) — fix the access issue first, then re-offer.",url:"https://talk.aloware.io/contacts/157829762/communications/917751092"},
+      {type:"flag",who:"Audrey Banares",disp:"Declined / Auto Bill · 13:56",note:"Auto-bill hesitation + vague need — deploy the control rebuttal and pin one specific gap.",url:"https://talk.aloware.io/contacts/155505823/communications/917316785"},
+      {type:"model",who:"Christian Buceron",disp:"Sold Physical · 44:21",note:"44-minute marathon close — deep discovery; anchored a strong day (24%).",url:"https://talk.aloware.io/contacts/145347967/communications/917442807"},
+      {type:"model",who:"Audrey Banares",disp:"Sold Physical · 26:38",note:"Patient discovery into a physical-product sale.",url:"https://talk.aloware.io/contacts/155050500/communications/918092566"},
+      {type:"model",who:"Andrea Isabel Balon",disp:"Sold Physical · 24:13",note:"Part of a 5-close, 22.7% day.",url:"https://talk.aloware.io/contacts/159360307/communications/917310346"},
+      {type:"model",who:"Romuel Sabile",disp:"Sold PG1+VIP · 18:56",note:"His one close — a full coaching bundle; replicate the transition.",url:"https://talk.aloware.io/contacts/159401477/communications/917683969"},
+    ],
+    rebuttals:[
+      {h:"Not interested",v:"(most common decline, 9 today)",r:"Reframe to the one shot that annoys them most; lead with the risk-free guarantee, not the product."},
+      {h:"Injured",v:"(4 today — physical limitation)",r:"Acknowledge the injury; position the app as low-impact practice for when they’re ready. Keep the relationship warm; don’t hard-pitch."},
+      {h:"Undecided",v:"(4 today)",r:"Give one concrete next step — one club, one shot — instead of the full menu."},
+      {h:"Auto Bill",v:"“I don’t want an automatic charge.”",r:"Nothing upfront, a weekly reminder, cancel in two taps before day 30 — they stay in control."},
+    ],
+    actions:[
+      {pri:true, t:"Romuel & Prince — Priority", d:"163 & 199 dials at 6.7% / 11.5% — queue quality + connect-to-offer transition."},
+      {t:"Decline watch", d:"Rubilyn (23.8%) and Kenneth (20%) convert well but decline a lot — tighten qualification to protect the pipeline."},
+      {t:"Study the winners", d:"Rubilyn 28.6%, Christian 24%, Kenneth 24%, Sitti 23.5% — six agents cleared 20%."},
+      {t:"Protect the strength", d:"47.6% upsell (20/42) — keep the PG1+VIP and club attach momentum."},
+    ],
+  },
   "2026-07-05": {
     heroTitle: "Follow-up Sunday — <em>41.1%</em> connect, but mostly post-purchase check-ins.",
     lede: "A Sunday skewed to service: 117 of 285 dials connected (<b>41.1%</b>), but 80 were already-communicated / post-purchase follow-ups. Only 9 sales (7.7% conv) — though upsell was excellent at <b>66.7%</b> (6/9), and Romuel landed a 72-minute PG1+VIP close.",
