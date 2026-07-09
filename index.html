@@ -390,6 +390,69 @@
 /* ============ DATA (per date, raw counts) ============ */
 const DATASET = {
   /* __NEW_DAY__ */
+  "2026-07-08": {
+    heroTitle: "Balanced day — <em>19.1%</em> conversion, every agent on the board.",
+    lede: "947 dials, <b>19.1%</b> conversion (27/141), and a <b>59.3%</b> upsell — the best attach rate of the stretch. Unusually even: all 10 agents closed at least 2. Audrey led at 37.5%, and even Prince got on the board (2 closes). Auto-bill was the top objection again.",
+    agents: [
+      {name:"Audrey Banares",dials:122,conn:8,sold:3,dec:0},
+      {name:"Rubilyn Estrada",dials:100,conn:9,sold:3,dec:2},
+      {name:"Laurice Pentinio",dials:54,conn:15,sold:4,dec:0},
+      {name:"Chelei Bago",dials:134,conn:14,sold:3,dec:4},
+      {name:"Kenneth Semira",dials:57,conn:14,sold:3,dec:0},
+      {name:"Romuel Sabile",dials:57,conn:14,sold:3,dec:0},
+      {name:"Christian Buceron",dials:53,conn:15,sold:2,dec:3},
+      {name:"Andrea Isabel Balon",dials:83,conn:15,sold:2,dec:0},
+      {name:"Prince Wendell De Luna",dials:175,conn:16,sold:2,dec:0},
+      {name:"Sitti Besas",dials:112,conn:21,sold:2,dec:2},
+    ],
+    upsellNum:16, upsellDen:27,
+    dispoDials:[
+      {label:"Unreachable / VM",count:734,c:"var(--orange)"},
+      {label:"Connected",count:141,c:"var(--good)"},
+      {label:"Busy / Ghost / Invalid",count:41,c:"var(--warn)"},
+      {label:"Blank / uncategorized",count:31,c:"var(--stone)"},
+    ],
+    dispoConn:[
+      {label:"Already comm / follow-up (B)",count:34,c:"var(--stone)"},
+      {label:"Call ended – PG1 (C)",count:31,c:"var(--warn)"},
+      {label:"Sold (D)",count:27,c:"var(--good)"},
+      {label:"Info provided / resolved (Q)",count:17,c:"var(--warn)"},
+      {label:"Cancellations (O)",count:12,c:"var(--orange)"},
+      {label:"Declined (F)",count:11,c:"var(--orange)"},
+      {label:"DNC / Callback / Member (G,X)",count:8,c:"var(--stone)"},
+    ],
+    headline:{
+      k:"Even scoreboard",
+      h:"Every agent closed — Audrey led at 37.5%.",
+      p:"947 dials → 141 connects (14.9%) → 27 sold (19.1%). No zero-close agents today: <strong>Audrey 37.5%, Rubilyn 33.3%, Laurice 26.7%</strong>, and Chelei / Kenneth / Romuel all 21.4%. Upsell was the standout at <strong>59.3%</strong> (16/27). Auto-bill hesitation remains the recurring objection."
+    },
+    glaring:{
+      k:"Sitti Besas · 112 dials · 21 connects (team-high) · 2 closes (9.5%)",
+      h:"Most connects, lowest conversion.",
+      p:"Sitti connected a team-high 21 times but converted just 9.5% — two lost to auto-bill and “we play for pleasure.” Prince carried a team-high 175 dials for 12.5%. Both connect well; tighten the offer-transition and the auto-bill rebuttal."
+    },
+    calls:[
+      {type:"flag",who:"Christian Buceron",disp:"Declined / Undecided · 18:37",note:"Real putting-gap admitted but no clean transition to the offer — tie the product to that exact miss.",url:"https://talk.aloware.io/contacts/159773227/communications/919114671"},
+      {type:"flag",who:"Chelei Bago",disp:"Declined / Auto Bill · 13:49",note:"Auto-bill hesitation — deploy the control rebuttal (nothing upfront, cancel in two taps).",url:"https://talk.aloware.io/contacts/159960789/communications/919515094"},
+      {type:"flag",who:"Sitti Besas",disp:"Declined / Auto Bill · 10:56",note:"“We play for pleasure, we don’t even score” — reframe from competition to fewer frustrating holes.",url:"https://talk.aloware.io/contacts/159265765/communications/919128189"},
+      {type:"model",who:"Chelei Bago",disp:"Sold PG1 + Upsell · 36:05",note:"Longest close of the day — PG1 with an attach; strong discovery.",url:"https://talk.aloware.io/contacts/159983499/communications/919755331"},
+      {type:"model",who:"Sitti Besas",disp:"Sold PG1 · 28:45",note:"One of Sitti’s two closes — the coaching-first transition that worked.",url:"https://talk.aloware.io/contacts/159956206/communications/919417884"},
+      {type:"model",who:"Prince Wendell De Luna",disp:"Sold PG1+VIP · 25:49",note:"Prince on the board — a full coaching bundle; replicate this transition.",url:"https://talk.aloware.io/contacts/159344501/communications/919143921"},
+      {type:"model",who:"Christian Buceron",disp:"Sold Physical + Upsell · 23:28",note:"Clean physical sale with an attach.",url:"https://talk.aloware.io/contacts/110444071/communications/919407259"},
+    ],
+    rebuttals:[
+      {h:"Auto Bill",v:"“We play for pleasure, we don’t even score.”",r:"Reframe from competition to fewer frustrating holes; nothing upfront, cancel in two taps before day 30 — they stay in control."},
+      {h:"Just bought",v:"(2 today — recent purchase)",r:"Book a 5-minute onboarding tied to their next round; the attach comes after the value shows up."},
+      {h:"Undecided",v:"“My putting’s not bad, but I go back and forth…”",r:"Anchor the offer to that exact miss — the app fixes the one shot they just described."},
+      {h:"Not interested",v:"(2 today)",r:"Reframe to the one shot that annoys them most; lead with the risk-free guarantee."},
+    ],
+    actions:[
+      {pri:true, t:"Sitti Besas — Priority", d:"Team-high 21 connects at 9.5% — offer-transition QA and the auto-bill control rebuttal."},
+      {t:"Auto-bill focus", d:"Top objection again (3 declines) — reinforce the “control” rebuttal team-wide tomorrow."},
+      {t:"Study the winners", d:"Audrey 37.5%, Rubilyn 33.3%, Laurice 26.7% — and every agent closed at least 2."},
+      {t:"Protect the strength", d:"59.3% upsell (16/27) — best attach rate of the stretch; keep it going."},
+    ],
+  },
   "2026-07-07": {
     heroTitle: "Conversion at <em>20.0%</em> — but three agents dialed all day with zero closes.",
     lede: "1,278 dials, though connect slipped to <b>12.9%</b>. Of those who connected, <b>20.0%</b> closed (33/165) with a strong <b>51.5%</b> upsell. The catch: Andrea, Romuel, and Prince made 521 dials between them and closed nothing — while Christian (45.5%), Kenneth (29.2%) and Sitti (25.9%) carried the day.",
